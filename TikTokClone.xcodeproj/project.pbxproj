@@ -97,6 +97,9 @@
 		2B1E9DEE2AD5A93A00902AE1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DED2AD5A93A00902AE1 /* AuthService.swift */; };
 		2B1E9DF02AD5B2EF00902AE1 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DEF2AD5B2EF00902AE1 /* RegistrationView.swift */; };
 		2B1E9DF22AD5B33E00902AE1 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DF12AD5B33E00902AE1 /* RegistrationViewModel.swift */; };
+		2B1E9DF42AD5BBE000902AE1 /* Firestore+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DF32AD5BBE000902AE1 /* Firestore+Query.swift */; };
+		2B1E9DF72AD5D00500902AE1 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DF62AD5D00500902AE1 /* EditProfileView.swift */; };
+		2B1E9DFB2AD5DA4800902AE1 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DFA2AD5DA4800902AE1 /* EditProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,6 +166,9 @@
 		2B1E9DED2AD5A93A00902AE1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		2B1E9DEF2AD5B2EF00902AE1 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		2B1E9DF12AD5B33E00902AE1 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		2B1E9DF32AD5BBE000902AE1 /* Firestore+Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Query.swift"; sourceTree = "<group>"; };
+		2B1E9DF62AD5D00500902AE1 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		2B1E9DFA2AD5DA4800902AE1 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				2B1E9D212AD3239500902AE1 /* DeveloperPreview.swift */,
+				2B1E9DF32AD5BBE000902AE1 /* Firestore+Query.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -345,6 +352,7 @@
 		2B1E9D062AD053FE00902AE1 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				2B1E9DF52AD5CFF800902AE1 /* EditProfile */,
 				2B1E9D752AD48C7B00902AE1 /* View */,
 				2B1E9D762AD48C7D00902AE1 /* ViewModel */,
 			);
@@ -657,6 +665,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2B1E9DF52AD5CFF800902AE1 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				2B1E9DF62AD5D00500902AE1 /* EditProfileView.swift */,
+				2B1E9DFA2AD5DA4800902AE1 /* EditProfileViewModel.swift */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -767,6 +784,7 @@
 				2B1E9D9B2AD4A53700902AE1 /* NotificationCellViewModel.swift in Sources */,
 				2B1E9CF12AD052B700902AE1 /* ContentView.swift in Sources */,
 				2B1E9D222AD3239500902AE1 /* DeveloperPreview.swift in Sources */,
+				2B1E9DF72AD5D00500902AE1 /* EditProfileView.swift in Sources */,
 				2B1E9DE02AD4B1E100902AE1 /* MediaUploader.swift in Sources */,
 				2B1E9DEE2AD5A93A00902AE1 /* AuthService.swift in Sources */,
 				2B1E9DDE2AD4B1CF00902AE1 /* UploadPostService.swift in Sources */,
@@ -778,6 +796,7 @@
 				2B1E9D4F2AD465C800902AE1 /* ContentViewModel.swift in Sources */,
 				2B1E9D672AD47A8000902AE1 /* CommentViewModel.swift in Sources */,
 				2B1E9D532AD469B900902AE1 /* MainTabView.swift in Sources */,
+				2B1E9DF42AD5BBE000902AE1 /* Firestore+Query.swift in Sources */,
 				2B1E9D872AD49F8200902AE1 /* UserListService.swift in Sources */,
 				2B1E9D102AD0549F00902AE1 /* FeedViewModel.swift in Sources */,
 				2B1E9D552AD46A9500902AE1 /* ExploreView.swift in Sources */,
@@ -804,6 +823,7 @@
 				2B1E9D7E2AD49A4000902AE1 /* NotificationsView.swift in Sources */,
 				2B1E9D1E2AD3054F00902AE1 /* FeedCell.swift in Sources */,
 				2B1E9DE62AD4B9F100902AE1 /* Movie.swift in Sources */,
+				2B1E9DFB2AD5DA4800902AE1 /* EditProfileViewModel.swift in Sources */,
 				2B1E9DEC2AD59F5500902AE1 /* MediaHelpers.swift in Sources */,
 				2B1E9D722AD4870100902AE1 /* ProfileHeaderView.swift in Sources */,
 				2B1E9D482AD4652600902AE1 /* LoginViewModel.swift in Sources */,

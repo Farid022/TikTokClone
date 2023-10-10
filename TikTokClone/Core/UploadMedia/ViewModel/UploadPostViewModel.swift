@@ -27,12 +27,12 @@ class UploadPostViewModel: ObservableObject {
     }
     
     func uploadPost() async {
-        guard caption.isEmpty else { return }
+        guard !caption.isEmpty else { return }
         guard let videoUrlString = mediaPreview?.url.absoluteString else { return }
         isLoading = true
         
         do {
-//            try await service.uploadPost(caption: caption, videoUrlString: videoUrlString)
+            try await service.uploadPost(caption: caption, videoUrlString: videoUrlString)
             isLoading = false
         } catch {
             self.error = error

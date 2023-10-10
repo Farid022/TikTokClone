@@ -46,13 +46,13 @@ import Firebase
 struct VideoUploader {
     static func uploadVideoToStorage(withUrl url: URL) async throws -> String? {
         let filename = NSUUID().uuidString
-        let ref = Storage.storage().reference(withPath: "/profile_images/").child(filename)
+        let ref = Storage.storage().reference(withPath: "/post_videos/").child(filename)
         let metadata = StorageMetadata()
         metadata.contentType = "video/quicktime"
         
         do {
             let data = try Data(contentsOf: url)
-            let _ = try await ref.putDataAsync(data)
+            let _ = try await ref.putDataAsync(data, metadata: metadata)
             let url = try await ref.downloadURL()
             return url.absoluteString
         } catch {

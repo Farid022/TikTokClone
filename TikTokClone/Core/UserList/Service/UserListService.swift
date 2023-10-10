@@ -5,10 +5,10 @@
 //  Created by Stephan Dowless on 10/9/23.
 //
 
-import Foundation
+import Firebase
 
 class UserListService {
     func fetchUsers() async throws -> [User] {
-        return DeveloperPreview.users
+        return try await FirestoreConstants.UserCollection.getDocuments(as: User.self)
     }
 }

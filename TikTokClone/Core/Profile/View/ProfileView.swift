@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct ProfileView: View {
-    let user: User
     @StateObject var viewModel: ProfileViewModel
     
+    private var user: User {
+        return viewModel.user
+    }
+    
     init(user: User) {
-        self.user = user
         self._viewModel = StateObject(wrappedValue: ProfileViewModel(user: user))
     }
     
     var body: some View {
         ScrollView {
             VStack(spacing: 2) {
-                ProfileHeaderView(user: user)
+                ProfileHeaderView(user: $viewModel.user)
                 
                 PostGridView(viewModel: viewModel)
             }

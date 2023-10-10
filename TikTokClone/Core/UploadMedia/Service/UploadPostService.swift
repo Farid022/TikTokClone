@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import Firebase
 
 struct UploadPostService {
@@ -17,6 +16,8 @@ struct UploadPostService {
         do {
             guard let url = URL(string: videoUrlString) else { return }
             guard let videoUrl = try await VideoUploader.uploadVideoToStorage(withUrl: url) else { return }
+            
+            print("DEBUG: Video url is \(videoUrl)")
             
             let post = Post(
                 id: ref.documentID,
@@ -34,7 +35,6 @@ struct UploadPostService {
 
             guard let postData = try? Firestore.Encoder().encode(post) else { return }
             try await ref.setData(postData)
-//            try await PostService.updateUserFeedsAfterPost(postId: ref.documentID)
         } catch {
             print("DEBUG: Failed to upload image with error \(error.localizedDescription)")
             throw error

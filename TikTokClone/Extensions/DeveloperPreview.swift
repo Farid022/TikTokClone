@@ -20,7 +20,7 @@ struct DeveloperPreview {
     )
     
     private static let videoUrls =  [
-        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "https://firebasestorage.googleapis.com:443/v0/b/tiktok-162bf.appspot.com/o/post_videos%2FB65A78A7-1CFA-4239-B0BC-88AF8BDBC165?alt=media&token=d0c1bd8e-c06c-4913-8a8e-2fc0fd25b905",
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -28,16 +28,16 @@ struct DeveloperPreview {
     ]
     
     static var users: [User] = [
-        .init(id: NSUUID().uuidString, username: "lewis.hamilton", email: "lewis@gmail.com", fullname: "Lewis Hamilton", profileImageUrl: "lewis-hamilton"),
-        .init(id: NSUUID().uuidString, username: "max.verstappen", email: "max@gmail.com", fullname: "Max Verstappen", profileImageUrl: "max-verstappen"),
-        .init(id: NSUUID().uuidString, username: "fernando.alonso", email: "fernando@gmail.com", fullname: "Fernado Alonso", profileImageUrl: "fernando-alonso"),
-        .init(id: NSUUID().uuidString, username: "charles.leclerc", email: "charles@gmail.com", fullname: "Charles Leclerc", profileImageUrl: "charles-leclerc"),
+        .init(id: NSUUID().uuidString, username: "lewis.hamilton", email: "lewis@gmail.com", fullname: "Lewis Hamilton"),
+        .init(id: NSUUID().uuidString, username: "max.verstappen", email: "max@gmail.com", fullname: "Max Verstappen"),
+        .init(id: NSUUID().uuidString, username: "fernando.alonso", email: "fernando@gmail.com", fullname: "Fernado Alonso"),
+        .init(id: NSUUID().uuidString, username: "charles.leclerc", email: "charles@gmail.com", fullname: "Charles Leclerc"),
     ]
     
     static var posts: [Post] = [
         .init(
             id: NSUUID().uuidString,
-            videoUrl: videoUrls[3],
+            videoUrl: videoUrls[0],
             ownerUid: "lewis.hamilton",
             caption: "This is some test caption for this post",
             likes: 200,

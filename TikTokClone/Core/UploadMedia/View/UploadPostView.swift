@@ -36,7 +36,7 @@ struct UploadPostView: View {
             
             Button {
                 Task {
-//                    await viewModel.uploadPost()
+                    await viewModel.uploadPost()
                     tabIndex = 0
                     viewModel.reset()
                     dismiss()

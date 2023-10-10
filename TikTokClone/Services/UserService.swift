@@ -17,4 +17,9 @@ class UserService {
         let snapshot = try await FirestoreConstants.UserCollection.document(uid).getDocument()
         return try snapshot.data(as: User.self)
     }
+    
+    func fetchUser(withUid uid: String) async throws -> User {
+        let snapshot = try await FirestoreConstants.UserCollection.document(uid).getDocument()
+        return try snapshot.data(as: User.self)
+    }
 }

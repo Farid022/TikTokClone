@@ -22,7 +22,7 @@ struct CurrentUserProfileView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 2) {
-                    ProfileHeaderView(user: user)
+                    ProfileHeaderView(user: $profileViewModel.user)
                         .padding(.top)
                     
                     PostGridView(viewModel: profileViewModel)

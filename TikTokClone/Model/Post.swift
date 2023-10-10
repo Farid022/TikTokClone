@@ -5,10 +5,13 @@
 //  Created by Stephan Dowless on 10/8/23.
 //
 
-import Foundation
+import Firebase
+import FirebaseFirestoreSwift
+import SwiftUI
+import AVKit
 
-struct Post: Identifiable {
-    var id = NSUUID().uuidString
+struct Post: Identifiable, Codable {
+    let id: String
     let videoUrl: String
     let ownerUid: String
     let caption: String
@@ -16,9 +19,13 @@ struct Post: Identifiable {
     var commentCount: Int
     var saveCount: Int
     var shareCount: Int
+    var views: Int
+    var thumbnailUrl: String
+    var timestamp: Timestamp
     
     var user: User?
     var didLike: Bool?
+    var didSave: Bool?
 }
 
 extension Post: Equatable {

@@ -11,10 +11,6 @@ import Foundation
 
 class UserService {
     func fetchCurrentUser() async throws -> User {
-        return User(
-            username: "max.verstappen",
-            email: "johndoe@gmail.com",
-            profileImageUrl: "max-verstappen"
-        )
+        return DeveloperPreview.user
     }
 }

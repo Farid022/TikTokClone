@@ -9,10 +9,14 @@ import SwiftUI
 
 struct ExploreView: View {
     var body: some View {
-        VStack {
-            Text("Explore")
+        NavigationStack {
+            UserListView()
+                .navigationTitle("Explore")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationDestination(for: User.self) { user in
+                    ProfileView(user: user)
+                }
         }
-        .toolbarBackground(.black, for: .tabBar)
     }
 }
 

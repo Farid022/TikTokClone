@@ -25,4 +25,14 @@ class FeedCellViewModel: ObservableObject {
         self.post.didLike = false
         self.post.likes -= 1
     }
+    
+    func save() async {
+        post.didSave = true
+        post.saveCount += 1
+    }
+    
+    func unsave() async {
+        post.didSave = false
+        post.saveCount -= 1
+    }
 }

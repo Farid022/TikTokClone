@@ -16,6 +16,7 @@ struct FeedCell: View {
     
     private var post: Post { return viewModel.post }
     private var didLike: Bool { return viewModel.post.didLike ?? false }
+    private var didSave: Bool { return viewModel.post.didSave ?? false }
     
     init(post: Post, player: Binding<AVPlayer>) {
         self._player = player
@@ -78,9 +79,9 @@ struct FeedCell: View {
                             }
                             
                             Button {
-                                
+                                handleSaveTapped()
                             } label: {
-                                FeedItemActionButtonView(imageName: "bookmark.fill", value: post.saveCount, height: 28, width: 22)
+                                FeedItemActionButtonView(imageName: "bookmark.fill", value: post.saveCount, height: 28, width: 22, tintColor: didSave ? .yellow : .white)
                             }
                             
                             Button {
@@ -114,7 +115,11 @@ struct FeedCell: View {
     }
     
     private func handleLikeTapped() {
-        Task { didLike ? try await viewModel.unlike() : try await viewModel.like() }
+        Task { didLike ? await viewModel.unlike() : await viewModel.like() }
+    }
+    
+    private func handleSaveTapped() {
+        Task { didSave ? await viewModel.unsave() : await viewModel.save() }
     }
 }
 

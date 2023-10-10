@@ -22,7 +22,6 @@ class FeedViewModel: ObservableObject {
         isLoading = true
         
         do {
-            try await Task.sleep(nanoseconds: 1_000_000_000)
             self.posts = try await service.fetchPosts()
             isLoading = false
         } catch {

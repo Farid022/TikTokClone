@@ -23,12 +23,12 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if viewModel.isAuthenticated {
-                MainTabView(authService: authService)
+            if viewModel.isAuthenticated, let user = viewModel.currentUser {
+                MainTabView(authService: authService, user: user)
                     .environmentObject(viewModel)
             } else {
 //                LoginView(service: authService)
-                MainTabView(authService: authService)
+                MainTabView(authService: authService, user: DeveloperPreview.user)
                     .environmentObject(viewModel)
             }
         }

@@ -6,34 +6,35 @@
 //
 
 import Combine
-import CoreLocation
+import Firebase
 
 @MainActor
 class ContentViewModel: ObservableObject {
-    @Published var isAuthenticated = false
+    @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     
     private var cancellables = Set<AnyCancellable>()
     private let authService: AuthService
     private let userService: UserService
     
-    
     init(authService: AuthService, userService: UserService) {
         self.authService = authService
         self.userService = userService
+        
+        authService.updateUserSession()
         
         setupSubscribers()
     }
     
     private func setupSubscribers() {
-        authService.$didAuthenticateUser.sink { [weak self] authenticated in
-            self?.isAuthenticated = authenticated
+        authService.$userSession.sink { [weak self] session in
+            self?.userSession = session
             self?.fetchCurrentUser()
         }.store(in: &cancellables)
     }
     
     func fetchCurrentUser() {
-        guard isAuthenticated else { return }
+        guard userSession != nil else { return }
         Task { self.currentUser = try await userService.fetchCurrentUser() }
     }
 }

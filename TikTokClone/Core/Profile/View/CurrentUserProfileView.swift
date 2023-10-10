@@ -28,6 +28,15 @@ struct CurrentUserProfileView: View {
                     PostGridView(viewModel: profileViewModel)
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        service.signout()
+                    } label: {
+                        Image(systemName: "line.3.horizontal")
+                    }
+                }
+            }
             .task { await profileViewModel.fetchPosts() }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)

@@ -5,12 +5,16 @@
 //  Created by Stephan Dowless on 10/9/23.
 //
 
-import Foundation
+import FirebaseAuth
 
-import Foundation
+enum UserError: Error {
+    case unauthenticated
+}
 
 class UserService {
     func fetchCurrentUser() async throws -> User {
-        return DeveloperPreview.user
+        guard let uid = Auth.auth().currentUser?.uid else { throw UserError.unauthenticated }
+        let snapshot = try await FirestoreConstants.UserCollection.document(uid).getDocument()
+        return try snapshot.data(as: User.self)
     }
 }

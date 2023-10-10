@@ -78,8 +78,8 @@ struct LoginView: View {
                 Divider()
                 
                 NavigationLink {
-                    Text("Sign up here..")
-                        .navigationBarBackButtonHidden(true)
+                    RegistrationView(service: service)
+                        .navigationBarBackButtonHidden()
                 } label: {
                     HStack(spacing: 3) {
                         Text("Don't have an account?")
@@ -106,11 +106,6 @@ extension LoginView: AuthenticationFormProtocol {
         && !viewModel.password.isEmpty
     }
 }
-
-#Preview {
-    LoginView(service: AuthService())
-}
-
 
 #Preview {
     LoginView(service: AuthService())

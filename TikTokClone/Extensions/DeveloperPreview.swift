@@ -11,6 +11,7 @@ import Firebase
 struct DeveloperPreview {
     
     static var user = User(
+        id: NSUUID().uuidString,
         username: "lewis.hamilton",
         email: "lewis@gmail.com",
         fullname: "Lewis Hamilton", 
@@ -27,10 +28,10 @@ struct DeveloperPreview {
     ]
     
     static var users: [User] = [
-        .init(username: "lewis.hamilton", email: "lewis@gmail.com", fullname: "Lewis Hamilton", profileImageUrl: "lewis-hamilton"),
-        .init(username: "max.verstappen", email: "max@gmail.com", fullname: "Max Verstappen", profileImageUrl: "max-verstappen"),
-        .init(username: "fernando.alonso", email: "fernando@gmail.com", fullname: "Fernado Alonso", profileImageUrl: "fernando-alonso"),
-        .init(username: "charles.leclerc", email: "charles@gmail.com", fullname: "Charles Leclerc", profileImageUrl: "charles-leclerc"),
+        .init(id: NSUUID().uuidString, username: "lewis.hamilton", email: "lewis@gmail.com", fullname: "Lewis Hamilton", profileImageUrl: "lewis-hamilton"),
+        .init(id: NSUUID().uuidString, username: "max.verstappen", email: "max@gmail.com", fullname: "Max Verstappen", profileImageUrl: "max-verstappen"),
+        .init(id: NSUUID().uuidString, username: "fernando.alonso", email: "fernando@gmail.com", fullname: "Fernado Alonso", profileImageUrl: "fernando-alonso"),
+        .init(id: NSUUID().uuidString, username: "charles.leclerc", email: "charles@gmail.com", fullname: "Charles Leclerc", profileImageUrl: "charles-leclerc"),
     ]
     
     static var posts: [Post] = [

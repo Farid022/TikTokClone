@@ -5,10 +5,10 @@
 //  Created by Stephan Dowless on 10/8/23.
 //
 
-import Foundation
+import FirebaseAuth
 
 struct User: Identifiable, Codable {
-    var id = NSUUID().uuidString
+    let id: String
     let username: String
     let email: String
     let fullname: String
@@ -19,7 +19,7 @@ struct User: Identifiable, Codable {
     var stats: UserStats?
     
     var isCurrentUser: Bool {
-        return username == "lewis.hamilton"
+        return id == Auth.auth().currentUser?.uid
     }
 }
 

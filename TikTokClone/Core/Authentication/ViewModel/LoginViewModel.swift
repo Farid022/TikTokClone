@@ -5,7 +5,7 @@
 //  Created by Stephan Dowless on 10/9/23.
 //
 
-import Foundation
+import FirebaseAuth
 
 @MainActor
 class LoginViewModel: ObservableObject {
@@ -15,9 +15,9 @@ class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     
-    private let service: AuthServiceProtocol
+    private let service: AuthService
     
-    init(service: AuthServiceProtocol) {
+    init(service: AuthService) {
         self.service = service
     }
     
@@ -28,9 +28,10 @@ class LoginViewModel: ObservableObject {
             try await service.login(withEmail: email, password: password)
             isAuthenticating = false
         } catch {
+            let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
             self.showAlert = true
             isAuthenticating = false
-            self.authError = AuthError.invalidEmail
+            self.authError = AuthError(authErrorCode: authError ?? .userNotFound)
         }
     }
 }

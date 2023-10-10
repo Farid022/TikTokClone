@@ -23,7 +23,7 @@
 		2B1E9D392AD45D1900902AE1 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D382AD45D1900902AE1 /* AuthError.swift */; };
 		2B1E9D3D2AD45D4B00902AE1 /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D3C2AD45D4B00902AE1 /* AuthServiceProtocol.swift */; };
 		2B1E9D3F2AD45D8100902AE1 /* AuthenticationFormProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D3E2AD45D8100902AE1 /* AuthenticationFormProtocol.swift */; };
-		2B1E9D442AD45DBB00902AE1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D432AD45DBB00902AE1 /* AuthService.swift */; };
+		2B1E9D442AD45DBB00902AE1 /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D432AD45DBB00902AE1 /* MockAuthService.swift */; };
 		2B1E9D462AD4650E00902AE1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D452AD4650E00902AE1 /* LoginView.swift */; };
 		2B1E9D482AD4652600902AE1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D472AD4652600902AE1 /* LoginViewModel.swift */; };
 		2B1E9D4B2AD4655200902AE1 /* StandardTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D4A2AD4655200902AE1 /* StandardTextFieldModifier.swift */; };
@@ -94,6 +94,9 @@
 		2B1E9DE82AD5991000902AE1 /* MediaSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DE72AD5991000902AE1 /* MediaSelectorView.swift */; };
 		2B1E9DEA2AD59B2200902AE1 /* UploadPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DE92AD59B2200902AE1 /* UploadPostView.swift */; };
 		2B1E9DEC2AD59F5500902AE1 /* MediaHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DEB2AD59F5500902AE1 /* MediaHelpers.swift */; };
+		2B1E9DEE2AD5A93A00902AE1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DED2AD5A93A00902AE1 /* AuthService.swift */; };
+		2B1E9DF02AD5B2EF00902AE1 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DEF2AD5B2EF00902AE1 /* RegistrationView.swift */; };
+		2B1E9DF22AD5B33E00902AE1 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DF12AD5B33E00902AE1 /* RegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,7 +117,7 @@
 		2B1E9D382AD45D1900902AE1 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		2B1E9D3C2AD45D4B00902AE1 /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		2B1E9D3E2AD45D8100902AE1 /* AuthenticationFormProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationFormProtocol.swift; sourceTree = "<group>"; };
-		2B1E9D432AD45DBB00902AE1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		2B1E9D432AD45DBB00902AE1 /* MockAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthService.swift; sourceTree = "<group>"; };
 		2B1E9D452AD4650E00902AE1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2B1E9D472AD4652600902AE1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		2B1E9D4A2AD4655200902AE1 /* StandardTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardTextFieldModifier.swift; sourceTree = "<group>"; };
@@ -157,6 +160,9 @@
 		2B1E9DE72AD5991000902AE1 /* MediaSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectorView.swift; sourceTree = "<group>"; };
 		2B1E9DE92AD59B2200902AE1 /* UploadPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostView.swift; sourceTree = "<group>"; };
 		2B1E9DEB2AD59F5500902AE1 /* MediaHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaHelpers.swift; sourceTree = "<group>"; };
+		2B1E9DED2AD5A93A00902AE1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		2B1E9DEF2AD5B2EF00902AE1 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		2B1E9DF12AD5B33E00902AE1 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,7 +442,8 @@
 		2B1E9D3A2AD45D3100902AE1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				2B1E9D432AD45DBB00902AE1 /* AuthService.swift */,
+				2B1E9D432AD45DBB00902AE1 /* MockAuthService.swift */,
+				2B1E9DED2AD5A93A00902AE1 /* AuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -454,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				2B1E9D452AD4650E00902AE1 /* LoginView.swift */,
+				2B1E9DEF2AD5B2EF00902AE1 /* RegistrationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -462,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				2B1E9D472AD4652600902AE1 /* LoginViewModel.swift */,
+				2B1E9DF12AD5B33E00902AE1 /* RegistrationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -759,6 +768,7 @@
 				2B1E9CF12AD052B700902AE1 /* ContentView.swift in Sources */,
 				2B1E9D222AD3239500902AE1 /* DeveloperPreview.swift in Sources */,
 				2B1E9DE02AD4B1E100902AE1 /* MediaUploader.swift in Sources */,
+				2B1E9DEE2AD5A93A00902AE1 /* AuthService.swift in Sources */,
 				2B1E9DDE2AD4B1CF00902AE1 /* UploadPostService.swift in Sources */,
 				2B1E9D1C2AD3009500902AE1 /* VideoPlayer.swift in Sources */,
 				2B1E9D932AD4A30F00902AE1 /* NotificationsViewModel.swift in Sources */,
@@ -783,6 +793,7 @@
 				2B1E9D892AD4A01400902AE1 /* UserCell.swift in Sources */,
 				2B1E9D7C2AD4986500902AE1 /* UploadIconView.swift in Sources */,
 				2B1E9D972AD4A41000902AE1 /* NotificationService.swift in Sources */,
+				2B1E9DF22AD5B33E00902AE1 /* RegistrationViewModel.swift in Sources */,
 				2B1E9DE32AD4B20900902AE1 /* FirestoreConstants.swift in Sources */,
 				2B1E9D742AD48A6200902AE1 /* PostGridView.swift in Sources */,
 				2B1E9D242AD3245700902AE1 /* Post.swift in Sources */,
@@ -797,10 +808,11 @@
 				2B1E9D722AD4870100902AE1 /* ProfileHeaderView.swift in Sources */,
 				2B1E9D482AD4652600902AE1 /* LoginViewModel.swift in Sources */,
 				2B1E9D3F2AD45D8100902AE1 /* AuthenticationFormProtocol.swift in Sources */,
+				2B1E9DF02AD5B2EF00902AE1 /* RegistrationView.swift in Sources */,
 				2B1E9D572AD46AC100902AE1 /* ProfileView.swift in Sources */,
 				2B1E9D512AD465F200902AE1 /* UserService.swift in Sources */,
 				2B1E9D292AD32C0100902AE1 /* ScrollViewStuff.swift in Sources */,
-				2B1E9D442AD45DBB00902AE1 /* AuthService.swift in Sources */,
+				2B1E9D442AD45DBB00902AE1 /* MockAuthService.swift in Sources */,
 				2B1E9D8B2AD4A18300902AE1 /* UserListViewModel.swift in Sources */,
 				2B1E9D4D2AD4656100902AE1 /* StandardButtonModifier.swift in Sources */,
 				2B1E9D782AD48C8C00902AE1 /* ProfileViewModel.swift in Sources */,

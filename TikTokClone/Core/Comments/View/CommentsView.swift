@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct CommentsView: View {
-    @State private var commentText = ""
     @StateObject var viewModel: CommentViewModel
+    private let currentUser: User
     
-    init(post: Post) {
-        let service = MockCommentService()
-        self._viewModel = StateObject(wrappedValue: CommentViewModel(post: post, service: service))
+    init(post: Post, currentUser: User) {
+        self.currentUser = currentUser
+        let service = CommentService(post: post)
+        let viewModel = CommentViewModel(post: post, service: service, currentUser: currentUser)
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -41,21 +43,23 @@ struct CommentsView: View {
                 .padding(.bottom)
             
             HStack(spacing: 12) {
-                CircularProfileImageView(user: DeveloperPreview.user, size: .xSmall)
+                CircularProfileImageView(user: currentUser, size: .xSmall)
                 
-                CommentInputView(inputText: $commentText, action: uploadComment)
+                CommentInputView(viewModel: viewModel)
             }
             .padding(.horizontal)
             .padding(.bottom)
         }
+        .overlay {
+            if viewModel.showEmptyView {
+                ContentUnavailableView("No comments yet. Add yours now!", systemImage: "exclamationmark.bubble")
+                    .foregroundStyle(.gray)
+            }
+        }
         .task { await viewModel.fetchComments() }
-    }
-    
-    func uploadComment() {
-        Task { await viewModel.uploadTestComment() }
     }
 }
 
 #Preview {
-    CommentsView(post: DeveloperPreview.posts[0])
+    CommentsView(post: DeveloperPreview.posts[0], currentUser: DeveloperPreview.user)
 }

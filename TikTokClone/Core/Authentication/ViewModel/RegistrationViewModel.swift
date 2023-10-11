@@ -31,8 +31,8 @@ class RegistrationViewModel: ObservableObject {
             try await service.createUser(
                 email: email,
                 password: password,
-                username: fullname,
-                fullname: username
+                username: username,
+                fullname: fullname
             )
             isAuthenticating = false
         } catch {

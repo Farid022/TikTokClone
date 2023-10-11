@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
-
+import AVKit 
 struct MainTabView: View {
     private let authService: AuthService
     private let user: User
     @State private var selectedTab = 0
+    @State private var player = AVPlayer()
+    @State private var playbackObserver: NSObjectProtocol?
     
     init(authService: AuthService, user: User) {
         self.authService = authService
@@ -19,7 +21,7 @@ struct MainTabView: View {
         
     var body: some View {
         TabView(selection: $selectedTab) {
-            FeedView()
+            FeedView(player: $player, currentUser: user)
                 .toolbarBackground(.black, for: .tabBar)
                 .tabItem {
                     VStack {
@@ -74,7 +76,32 @@ struct MainTabView: View {
                 .onAppear { selectedTab = 4 }
                 .tag(4)
         }
+        .onAppear {
+            configurePlaybackObserver()
+        }
+        .onDisappear {
+            removePlaybackObserver()
+        }
         .tint(selectedTab == 0 ? .white : .black)
+    }
+    
+    func configurePlaybackObserver() {
+        self.playbackObserver = NotificationCenter.default.addObserver(forName: AVPlayerItem.didPlayToEndTimeNotification,
+                                                                       object: nil,
+                                                                       queue: .main) { _ in
+            if player.timeControlStatus == .playing {
+                self.player.seek(to: CMTime.zero)
+                self.player.play()
+            }
+        }
+    }
+    
+    func removePlaybackObserver() {
+        if let playbackObserver {
+            NotificationCenter.default.removeObserver(playbackObserver,
+                                                      name: AVPlayerItem.didPlayToEndTimeNotification,
+                                                      object: nil)
+        }
     }
 }
 

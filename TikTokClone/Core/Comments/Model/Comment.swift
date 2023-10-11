@@ -5,14 +5,14 @@
 //  Created by Stephan Dowless on 10/9/23.
 //
 
-import Foundation
+import Firebase
 
 struct Comment: Identifiable, Codable {
-    var id = NSUUID().uuidString
+    let id: String
     let postOwnerUid: String
     let commentText: String
     let postId: String
-    let timestamp: Date
+    let timestamp: Timestamp
     let commentOwnerUid: String
     
     var user: User?

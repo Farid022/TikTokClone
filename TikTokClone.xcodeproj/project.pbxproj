@@ -40,7 +40,6 @@
 		2B1E9D672AD47A8000902AE1 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D662AD47A8000902AE1 /* CommentViewModel.swift */; };
 		2B1E9D692AD47AD400902AE1 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D682AD47AD400902AE1 /* CommentService.swift */; };
 		2B1E9D6B2AD47C6700902AE1 /* CommentInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D6A2AD47C6700902AE1 /* CommentInputView.swift */; };
-		2B1E9D6D2AD47FDD00902AE1 /* FeedCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D6C2AD47FDD00902AE1 /* FeedCellViewModel.swift */; };
 		2B1E9D702AD4834500902AE1 /* CurrentUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D6F2AD4834500902AE1 /* CurrentUserProfileView.swift */; };
 		2B1E9D722AD4870100902AE1 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D712AD4870100902AE1 /* ProfileHeaderView.swift */; };
 		2B1E9D742AD48A6200902AE1 /* PostGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9D732AD48A6200902AE1 /* PostGridView.swift */; };
@@ -100,6 +99,9 @@
 		2B1E9DF42AD5BBE000902AE1 /* Firestore+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DF32AD5BBE000902AE1 /* Firestore+Query.swift */; };
 		2B1E9DF72AD5D00500902AE1 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DF62AD5D00500902AE1 /* EditProfileView.swift */; };
 		2B1E9DFB2AD5DA4800902AE1 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DFA2AD5DA4800902AE1 /* EditProfileViewModel.swift */; };
+		2B1E9DFD2AD6472400902AE1 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DFC2AD6472400902AE1 /* PostService.swift */; };
+		2B1E9E002AD7004D00902AE1 /* NotifcationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DFF2AD7004D00902AE1 /* NotifcationManager.swift */; };
+		2B1E9E022AD71CEE00902AE1 /* Firestore+Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9E012AD71CEE00902AE1 /* Firestore+Timestamp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,7 +139,6 @@
 		2B1E9D662AD47A8000902AE1 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		2B1E9D682AD47AD400902AE1 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		2B1E9D6A2AD47C6700902AE1 /* CommentInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputView.swift; sourceTree = "<group>"; };
-		2B1E9D6C2AD47FDD00902AE1 /* FeedCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellViewModel.swift; sourceTree = "<group>"; };
 		2B1E9D6F2AD4834500902AE1 /* CurrentUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserProfileView.swift; sourceTree = "<group>"; };
 		2B1E9D712AD4870100902AE1 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		2B1E9D732AD48A6200902AE1 /* PostGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGridView.swift; sourceTree = "<group>"; };
@@ -169,6 +170,9 @@
 		2B1E9DF32AD5BBE000902AE1 /* Firestore+Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Query.swift"; sourceTree = "<group>"; };
 		2B1E9DF62AD5D00500902AE1 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		2B1E9DFA2AD5DA4800902AE1 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		2B1E9DFC2AD6472400902AE1 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		2B1E9DFF2AD7004D00902AE1 /* NotifcationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifcationManager.swift; sourceTree = "<group>"; };
+		2B1E9E012AD71CEE00902AE1 /* Firestore+Timestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Timestamp.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +269,7 @@
 			children = (
 				2B1E9D502AD465F200902AE1 /* UserService.swift */,
 				2B1E9DDF2AD4B1E100902AE1 /* MediaUploader.swift */,
+				2B1E9DFC2AD6472400902AE1 /* PostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 			children = (
 				2B1E9D212AD3239500902AE1 /* DeveloperPreview.swift */,
 				2B1E9DF32AD5BBE000902AE1 /* Firestore+Query.swift */,
+				2B1E9E012AD71CEE00902AE1 /* Firestore+Timestamp.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -362,6 +368,7 @@
 		2B1E9D072AD053FF00902AE1 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				2B1E9DFE2AD7004300902AE1 /* Managers */,
 				2B1E9D902AD4A2F000902AE1 /* Model */,
 				2B1E9D912AD4A2F200902AE1 /* Service */,
 				2B1E9D8F2AD4A2EC00902AE1 /* View */,
@@ -417,7 +424,6 @@
 			isa = PBXGroup;
 			children = (
 				2B1E9D0F2AD0549F00902AE1 /* FeedViewModel.swift */,
-				2B1E9D6C2AD47FDD00902AE1 /* FeedCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -674,6 +680,14 @@
 			path = EditProfile;
 			sourceTree = "<group>";
 		};
+		2B1E9DFE2AD7004300902AE1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2B1E9DFF2AD7004D00902AE1 /* NotifcationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -779,11 +793,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1E9E002AD7004D00902AE1 /* NotifcationManager.swift in Sources */,
 				2B1E9D852AD49F6A00902AE1 /* UserListConfig.swift in Sources */,
 				2B1E9D6B2AD47C6700902AE1 /* CommentInputView.swift in Sources */,
 				2B1E9D9B2AD4A53700902AE1 /* NotificationCellViewModel.swift in Sources */,
 				2B1E9CF12AD052B700902AE1 /* ContentView.swift in Sources */,
 				2B1E9D222AD3239500902AE1 /* DeveloperPreview.swift in Sources */,
+				2B1E9E022AD71CEE00902AE1 /* Firestore+Timestamp.swift in Sources */,
 				2B1E9DF72AD5D00500902AE1 /* EditProfileView.swift in Sources */,
 				2B1E9DE02AD4B1E100902AE1 /* MediaUploader.swift in Sources */,
 				2B1E9DEE2AD5A93A00902AE1 /* AuthService.swift in Sources */,
@@ -810,6 +826,7 @@
 				2B1E9DE82AD5991000902AE1 /* MediaSelectorView.swift in Sources */,
 				2B1E9D392AD45D1900902AE1 /* AuthError.swift in Sources */,
 				2B1E9D892AD4A01400902AE1 /* UserCell.swift in Sources */,
+				2B1E9DFD2AD6472400902AE1 /* PostService.swift in Sources */,
 				2B1E9D7C2AD4986500902AE1 /* UploadIconView.swift in Sources */,
 				2B1E9D972AD4A41000902AE1 /* NotificationService.swift in Sources */,
 				2B1E9DF22AD5B33E00902AE1 /* RegistrationViewModel.swift in Sources */,
@@ -818,7 +835,6 @@
 				2B1E9D242AD3245700902AE1 /* Post.swift in Sources */,
 				2B1E9D952AD4A31600902AE1 /* Notification.swift in Sources */,
 				2B1E9D992AD4A4FD00902AE1 /* NotificationCell.swift in Sources */,
-				2B1E9D6D2AD47FDD00902AE1 /* FeedCellViewModel.swift in Sources */,
 				2B1E9DEA2AD59B2200902AE1 /* UploadPostView.swift in Sources */,
 				2B1E9D7E2AD49A4000902AE1 /* NotificationsView.swift in Sources */,
 				2B1E9D1E2AD3054F00902AE1 /* FeedCell.swift in Sources */,

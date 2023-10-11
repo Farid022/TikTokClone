@@ -25,6 +25,9 @@ struct NotificationsView: View {
             .overlay {
                 if viewModel.isLoading {
                     ProgressView()
+                } else if viewModel.showEmptyView {
+                    ContentUnavailableView("No notifications to show", systemImage: "bubble.middle.bottom")
+                        .foregroundStyle(.gray)
                 }
             }
             .navigationDestination(for: User.self, destination: { user in

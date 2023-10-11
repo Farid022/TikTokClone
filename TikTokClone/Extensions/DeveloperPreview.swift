@@ -19,7 +19,7 @@ struct DeveloperPreview {
         profileImageUrl: "lewis-hamilton"
     )
     
-    private static let videoUrls =  [
+    static let videoUrls =  [
         "https://firebasestorage.googleapis.com:443/v0/b/tiktok-162bf.appspot.com/o/post_videos%2FB65A78A7-1CFA-4239-B0BC-88AF8BDBC165?alt=media&token=d0c1bd8e-c06c-4913-8a8e-2fc0fd25b905",
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -80,47 +80,51 @@ struct DeveloperPreview {
     ]
     
     static var comment = Comment(
+        id: NSUUID().uuidString,
         postOwnerUid: "test",
         commentText: "This is a test comment for preview purposes",
         postId: "",
-        timestamp: Date(),
+        timestamp: Timestamp(),
         commentOwnerUid: "",
         user: user
     )
     
     static var comments: [Comment] = [
         .init(
+            id: NSUUID().uuidString,
             postOwnerUid: "test",
             commentText: "This is a test comment for preview purposes",
             postId: "",
-            timestamp: Date(),
+            timestamp: Timestamp(),
             commentOwnerUid: "",
             user: user
         ),
         .init(
+            id: NSUUID().uuidString,
             postOwnerUid: "test",
             commentText: "This is another test comment so we have some mock data to work with",
             postId: "",
-            timestamp: Date(),
+            timestamp: Timestamp(),
             commentOwnerUid: "",
             user: users[1]
         ),
         .init(
+            id: NSUUID().uuidString,
             postOwnerUid: "test",
             commentText: "Final test comment to use in preview ",
             postId: "",
-            timestamp: Date(),
+            timestamp: Timestamp(),
             commentOwnerUid: "",
             user: users[2]
         ),
     ]
     
     static var notifications: [Notification] = [
-        .init(postId: "", timestamp: Date(), type: .comment, uid: "lewis-hamilton", post: posts[0], user: user),
-        .init(postId: "", timestamp: Date(), type: .like, uid: "max-verstappen", post: posts[2], user: users[3]),
-        .init(postId: "", timestamp: Date(), type: .comment, uid: "lewis-hamilton", post: posts[1], user: user),
-        .init(postId: "", timestamp: Date(), type: .comment, uid: "fernando-alonso", post: posts[0], user: users[2]),
-        .init(timestamp: Date(), type: .follow, uid: "lewis-hamilton", user: users[1]),
-        .init(postId: "", timestamp: Date(), type: .comment, uid: "lewis-hamilton", post: posts[1], user: user),
+        .init(id: NSUUID().uuidString, postId: "", timestamp: Timestamp(), type: .comment, uid: "lewis-hamilton", post: posts[0], user: user),
+        .init(id: NSUUID().uuidString, postId: "", timestamp: Timestamp(), type: .like, uid: "max-verstappen", post: posts[2], user: users[3]),
+        .init(id: NSUUID().uuidString, postId: "", timestamp: Timestamp(), type: .comment, uid: "lewis-hamilton", post: posts[1], user: user),
+        .init(id: NSUUID().uuidString, postId: "", timestamp: Timestamp(), type: .comment, uid: "fernando-alonso", post: posts[0], user: users[2]),
+        .init(id: NSUUID().uuidString, timestamp: Timestamp(), type: .follow, uid: "lewis-hamilton", user: users[1]),
+        .init(id: NSUUID().uuidString, postId: "", timestamp: Timestamp(), type: .comment, uid: "lewis-hamilton", post: posts[1], user: user),
     ]
 }

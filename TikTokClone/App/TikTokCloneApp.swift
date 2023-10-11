@@ -11,7 +11,6 @@ import FirebaseCore
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-      print("DEBUG: Did finish launching")
     FirebaseApp.configure()
     return true
   }
@@ -26,6 +25,7 @@ struct TikTokCloneApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(authService: authService, userService: userService)
+//            ScrollViewStuff()
         }
     }
 }

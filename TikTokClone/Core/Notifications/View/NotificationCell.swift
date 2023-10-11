@@ -24,23 +24,20 @@ struct NotificationCell: View {
     
     var body: some View {
         HStack {
-            if let user = notification.user {
+            NavigationLink(value: notification.user) {
+                CircularProfileImageView(user: notification.user, size: .xSmall)
                 
-                NavigationLink(value: user) {
-                    CircularProfileImageView(user: user, size: .xSmall)
+                HStack {
+                    Text(notification.user?.username ?? "")
+                        .font(.system(size: 14, weight: .semibold)) +
                     
-                    HStack {
-                        Text(user.username)
-                            .font(.system(size: 14, weight: .semibold)) +
-                        
-                        Text(notification.type.notificationMessage)
-                            .font(.system(size: 14)) +
-                        
-                        Text(" 2d")
-                            .foregroundColor(.gray).font(.system(size: 12))
-                    }
-                    .multilineTextAlignment(.leading)
+                    Text(notification.type.notificationMessage)
+                        .font(.system(size: 14)) +
+                    
+                    Text(" \(notification.timestamp.timestampString())")
+                        .foregroundColor(.gray).font(.system(size: 12))
                 }
+                .multilineTextAlignment(.leading)
             }
             
             Spacer()
@@ -57,11 +54,14 @@ struct NotificationCell: View {
                         .cornerRadius(6)
                 })
             } else {
-                Image(notification.post?.thumbnailUrl ?? "")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 48, height: 48)
-                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                if let post = notification.post, 
+                    let image = MediaHelpers.generateThumbnail(path: post.videoUrl) {
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 48, height: 48)
+                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                }
             }
         }
         .padding(.horizontal)

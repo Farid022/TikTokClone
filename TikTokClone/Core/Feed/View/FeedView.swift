@@ -9,18 +9,19 @@ import SwiftUI
 import AVKit
 
 struct FeedView: View {
-    @State private var player = AVPlayer()
-    @StateObject var viewModel = FeedViewModel(service: FeedService())
+    @Binding var player: AVPlayer
+    @StateObject var viewModel = FeedViewModel(feedService: FeedService(), postService: PostService())
     @State private var scrollPosition: String?
+    let currentUser: User
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    ForEach(viewModel.posts) { post in
-                        FeedCell(post: post, player: $player)
+                    ForEach($viewModel.posts) { post in
+                        FeedCell(post: post, player: player, currentUser: currentUser, viewModel: viewModel)
                             .id(post.id)
-                            .onAppear { playInitialVideoIfNecessary(forPost: post) }
+                            .onAppear { playInitialVideoIfNecessary(forPost: post.wrappedValue) }
                     }
                 }
                 .scrollTargetLayout()
@@ -55,13 +56,9 @@ struct FeedView: View {
         player.replaceCurrentItem(with: nil)
         let playerItem = AVPlayerItem(url: URL(string: currentPost.videoUrl)!)
         player.replaceCurrentItem(with: playerItem)
-        
-        if player.timeControlStatus == .paused {
-            player.play()
-        }
     }
 }
 
-#Preview {
-    FeedView()
-}
+//#Preview {
+//    FeedView(currentUser: DeveloperPreview.user)
+//}

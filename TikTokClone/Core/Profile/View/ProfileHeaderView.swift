@@ -38,6 +38,7 @@ struct ProfileHeaderView: View {
                     Text("Edit Profile")
                         .font(.system(size: 14, weight: .semibold))
                         .frame(width: 360, height: 32)
+                        .foregroundStyle(.black)
                         .background(Color(.systemGray6))
                         .clipShape(RoundedRectangle(cornerRadius: 6))
                 }

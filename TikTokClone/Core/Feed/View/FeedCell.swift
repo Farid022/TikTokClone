@@ -9,18 +9,22 @@ import SwiftUI
 import AVKit
 
 struct FeedCell: View {
-    @ObservedObject var viewModel: FeedCellViewModel
-    @Binding var player: AVPlayer
+    var player: AVPlayer
+    @ObservedObject var viewModel: FeedViewModel
     @State private var expandCaption = false
     @State private var showComments = false
     
-    private var post: Post { return viewModel.post }
-    private var didLike: Bool { return viewModel.post.didLike ?? false }
-    private var didSave: Bool { return viewModel.post.didSave ?? false }
+    private let currentUser: User
+    @Binding var post: Post
     
-    init(post: Post, player: Binding<AVPlayer>) {
-        self._player = player
-        self.viewModel = FeedCellViewModel(post: post)
+    private var didLike: Bool { return post.didLike }
+    private var didSave: Bool { return post.didSave }
+    
+    init(post: Binding<Post>, player: AVPlayer, currentUser: User, viewModel: FeedViewModel) {
+        self._post = post
+        self.currentUser = currentUser
+        self.player = player
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -73,6 +77,7 @@ struct FeedCell: View {
                             }
                             
                             Button {
+                                player.pause()
                                 showComments.toggle()
                             } label: {
                                 FeedItemActionButtonView(imageName: "ellipsis.bubble.fill", value: post.commentCount)
@@ -96,7 +101,7 @@ struct FeedCell: View {
                 }
             }
             .sheet(isPresented: $showComments) {
-                CommentsView(post: post)
+                CommentsView(post: post, currentUser: currentUser)
                     .presentationDetents([.height(UIScreen.main.bounds.height * 0.65)])
             }
             .onTapGesture {
@@ -115,11 +120,11 @@ struct FeedCell: View {
     }
     
     private func handleLikeTapped() {
-        Task { didLike ? await viewModel.unlike() : await viewModel.like() }
+        Task { didLike ? await viewModel.unlike(post) : await viewModel.like(post) }
     }
     
     private func handleSaveTapped() {
-        Task { didSave ? await viewModel.unsave() : await viewModel.save() }
+//        Task { (post.didSave ?? false) ? await viewModel.unsave() : await viewModel.save() }
     }
 }
 

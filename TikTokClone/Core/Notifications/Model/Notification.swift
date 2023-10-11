@@ -5,12 +5,12 @@
 //  Created by Stephan Dowless on 10/9/23.
 //
 
-import Foundation
+import Firebase
 
 struct Notification: Identifiable, Codable {
-    var id = NSUUID().uuidString
+    let id: String
     var postId: String?
-    let timestamp: Date
+    let timestamp: Timestamp
     let type: NotificationType
     let uid: String
     

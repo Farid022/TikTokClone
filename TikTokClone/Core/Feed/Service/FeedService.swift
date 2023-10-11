@@ -8,7 +8,8 @@
 import Foundation
 
 class FeedService {
-    var posts = [Post]()
+    private var posts = [Post]()
+    private let userService = UserService()
     
     func fetchPosts() async throws -> [Post] {
         self.posts = try await FirestoreConstants.PostsCollection.getDocuments(as: Post.self)
@@ -25,7 +26,7 @@ class FeedService {
     private func fetchPostUserData(_ post: Post) async throws {
         guard let index = posts.firstIndex(where: { $0.id == post.id }) else { return }
         
-        let user = try await UserService().fetchUser(withUid: post.ownerUid)
+        let user = try await userService.fetchUser(withUid: post.ownerUid)
         posts[index].user = user
     }
 }

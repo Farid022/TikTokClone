@@ -26,9 +26,17 @@ struct FeedView: View {
                 }
                 .scrollTargetLayout()
             }
+            .background(.black)
             .onAppear { player.play() }
             .onDisappear { player.pause() }
-            .overlay { if viewModel.isLoading { ProgressView() } }
+            .overlay { 
+                if viewModel.isLoading { 
+                    ProgressView()
+                } else if viewModel.showEmptyView {
+                    ContentUnavailableView("No posts to show", systemImage: "eye.slash")
+                        .foregroundStyle(.white)
+                }
+            }
             .scrollPosition(id: $scrollPosition)
             .scrollTargetBehavior(.paging)
             .ignoresSafeArea()

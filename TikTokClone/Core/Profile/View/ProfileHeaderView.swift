@@ -28,7 +28,7 @@ struct ProfileHeaderView: View {
             // stats view
             HStack(spacing: 16) {
                 UserStatView(value: user.stats.following, title: "Following")
-
+                
                 UserStatView(value: user.stats.followers, title: "Followers")
                 
                 UserStatView(value: user.stats.likes, title: "Likes")
@@ -102,6 +102,9 @@ struct UserStatView: View {
 }
 
 #Preview {
-    ProfileHeaderView(viewModel: ProfileViewModel(user: DeveloperPreview.user,
-                                                  userService: UserService()))
+    ProfileHeaderView(viewModel: ProfileViewModel(
+        user: DeveloperPreview.user,
+        userService: UserService(),
+        postService: PostService())
+    )
 }

@@ -15,7 +15,9 @@ struct ProfileView: View {
     }
     
     init(user: User) {
-        let profileViewModel = ProfileViewModel(user: user, userService: UserService())
+        let profileViewModel = ProfileViewModel(user: user, 
+                                                userService: UserService(),
+                                                postService: PostService())
         self._viewModel = StateObject(wrappedValue: profileViewModel)
     }
     
@@ -27,7 +29,7 @@ struct ProfileView: View {
                 PostGridView(viewModel: viewModel)
             }
         }
-        .task { await viewModel.fetchPosts() }
+        .task { await viewModel.fetchUserPosts() }
         .task { await viewModel.checkIfUserIsFollowed() }
         .task { await viewModel.fetchUserStats() }
         .toolbar(.hidden, for: .tabBar)

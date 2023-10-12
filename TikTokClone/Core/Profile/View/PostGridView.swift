@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PostGridView: View {
     @ObservedObject var viewModel: ProfileViewModel
@@ -20,18 +21,20 @@ struct PostGridView: View {
     var body: some View {
         LazyVGrid(columns: items, spacing: 2, content: {
             ForEach(viewModel.posts) { post in
-                if let image = MediaHelpers.generateThumbnail(path: post.videoUrl) {
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: width, height: 160)
-                        .clipped()
-                }
+                KFImage(URL(string: post.thumbnailUrl))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: width, height: 160)
+                    .clipped()
             }
         })
     }
 }
 
 #Preview {
-    PostGridView(viewModel: ProfileViewModel(user: DeveloperPreview.user, userService: UserService()))
+    PostGridView(viewModel: ProfileViewModel(
+        user: DeveloperPreview.user,
+        userService: UserService(),
+        postService: PostService())
+    )
 }

@@ -16,7 +16,9 @@ struct CurrentUserProfileView: View {
         self.authService = authService
         self.user = user
         
-        let viewModel = ProfileViewModel(user: user, userService: UserService())
+        let viewModel = ProfileViewModel(user: user,
+                                         userService: UserService(),
+                                         postService: PostService())
         self._profileViewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -39,7 +41,7 @@ struct CurrentUserProfileView: View {
                     }
                 }
             }
-            .task { await profileViewModel.fetchPosts() }
+            .task { await profileViewModel.fetchUserPosts() }
             .task { await profileViewModel.fetchUserStats() }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)

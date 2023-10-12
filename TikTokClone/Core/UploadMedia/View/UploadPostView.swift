@@ -21,8 +21,8 @@ struct UploadPostView: View {
                 
                 Spacer()
                 
-                if let image = MediaHelpers.generateThumbnail(path: movie.url.absoluteString) {
-                    image
+                if let uiImage = MediaHelpers.generateThumbnail(path: movie.url.absoluteString) {
+                    Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 88, height: 100)

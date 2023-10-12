@@ -11,6 +11,7 @@ import SwiftUI
 class FeedViewModel: ObservableObject {
     @Published var posts = [Post]()
     @Published var isLoading = false
+    @Published var showEmptyView = false
     private let feedService: FeedService
     private let postService: PostService
 
@@ -28,6 +29,7 @@ class FeedViewModel: ObservableObject {
             self.posts = try await feedService.fetchPosts()
             isLoading = false
             await checkIfUserLikedPosts()
+            self.showEmptyView = posts.isEmpty
         } catch {
             isLoading = false
             print("DEBUG: Failed to fetch posts \(error.localizedDescription)")
@@ -67,6 +69,7 @@ extension FeedViewModel {
     }
     
     func checkIfUserLikedPosts() async {
+        guard !posts.isEmpty else { return }
         var copy = posts
         
         for i in 0 ..< copy.count {

@@ -14,6 +14,19 @@ class PostService {
             .document(postId)
             .getDocument(as: Post.self)
     }
+    
+    func fetchUserPosts(user: User) async throws -> [Post] {
+        var posts = try await FirestoreConstants
+            .PostsCollection
+            .whereField("ownerUid", isEqualTo: user.id)
+            .getDocuments(as: Post.self)
+        
+        for i in 0 ..< posts.count {
+            posts[i].user = user
+        }
+        
+        return posts
+    }
 }
 
 // MARK: - Likes

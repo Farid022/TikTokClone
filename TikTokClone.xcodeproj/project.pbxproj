@@ -102,6 +102,7 @@
 		2B1E9DFD2AD6472400902AE1 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DFC2AD6472400902AE1 /* PostService.swift */; };
 		2B1E9E002AD7004D00902AE1 /* NotifcationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DFF2AD7004D00902AE1 /* NotifcationManager.swift */; };
 		2B1E9E022AD71CEE00902AE1 /* Firestore+Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9E012AD71CEE00902AE1 /* Firestore+Timestamp.swift */; };
+		2B1E9E082AD86D9800902AE1 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9E072AD86D9800902AE1 /* ProfileService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,6 +174,7 @@
 		2B1E9DFC2AD6472400902AE1 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		2B1E9DFF2AD7004D00902AE1 /* NotifcationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifcationManager.swift; sourceTree = "<group>"; };
 		2B1E9E012AD71CEE00902AE1 /* Firestore+Timestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Timestamp.swift"; sourceTree = "<group>"; };
+		2B1E9E072AD86D9800902AE1 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				2B1E9DF52AD5CFF800902AE1 /* EditProfile */,
+				2B1E9E062AD86D8A00902AE1 /* Service */,
 				2B1E9D752AD48C7B00902AE1 /* View */,
 				2B1E9D762AD48C7D00902AE1 /* ViewModel */,
 			);
@@ -688,6 +691,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		2B1E9E062AD86D8A00902AE1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2B1E9E072AD86D9800902AE1 /* ProfileService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -837,6 +848,7 @@
 				2B1E9D992AD4A4FD00902AE1 /* NotificationCell.swift in Sources */,
 				2B1E9DEA2AD59B2200902AE1 /* UploadPostView.swift in Sources */,
 				2B1E9D7E2AD49A4000902AE1 /* NotificationsView.swift in Sources */,
+				2B1E9E082AD86D9800902AE1 /* ProfileService.swift in Sources */,
 				2B1E9D1E2AD3054F00902AE1 /* FeedCell.swift in Sources */,
 				2B1E9DE62AD4B9F100902AE1 /* Movie.swift in Sources */,
 				2B1E9DFB2AD5DA4800902AE1 /* EditProfileViewModel.swift in Sources */,

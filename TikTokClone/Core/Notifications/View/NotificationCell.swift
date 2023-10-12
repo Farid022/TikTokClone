@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct NotificationCell: View {
     @ObservedObject var viewModel: NotificationCellViewModel
@@ -57,9 +58,8 @@ struct NotificationCell: View {
                         .cornerRadius(6)
                 })
             } else {
-                if let post = notification.post, 
-                    let image = MediaHelpers.generateThumbnail(path: post.videoUrl) {
-                    image
+                if let post = notification.post {
+                    KFImage(URL(string: post.thumbnailUrl))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 48, height: 48)

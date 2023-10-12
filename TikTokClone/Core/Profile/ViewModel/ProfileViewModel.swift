@@ -14,17 +14,15 @@ class ProfileViewModel: ObservableObject {
     @Published var user: User
     
     private let userService: UserService
+    private let postService: PostService
     private var didCompleteFollowCheck = false
     private var didCompleteStatsFetch = false
     
-    init(user: User, userService: UserService) {
+    init(user: User, userService: UserService, postService: PostService) {
         self.user = user
         self.userService = userService
+        self.postService = postService
     }
-    
-    func fetchPosts() async {
-        self.posts = DeveloperPreview.posts.filter({ $0.ownerUid == user.username })
-    }    
 }
 
 // MARK: - Following
@@ -66,6 +64,18 @@ extension ProfileViewModel {
             didCompleteStatsFetch = true
         } catch {
             print("DEBUG: Failed to fetch user stats with error \(error.localizedDescription)")
+        }
+    }
+}
+
+// MARK: - Posts
+
+extension ProfileViewModel {
+    func fetchUserPosts() async {
+        do {
+            self.posts = try await postService.fetchUserPosts(user: user)
+        } catch {
+            print("DEBUG: Failed to fetch posts with error: \(error.localizedDescription)")
         }
     }
 }

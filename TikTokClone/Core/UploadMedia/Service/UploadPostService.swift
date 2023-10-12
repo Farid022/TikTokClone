@@ -16,9 +16,7 @@ struct UploadPostService {
         do {
             guard let url = URL(string: videoUrlString) else { return }
             guard let videoUrl = try await VideoUploader.uploadVideoToStorage(withUrl: url) else { return }
-            
-            print("DEBUG: Video url is \(videoUrl)")
-            
+                        
             let post = Post(
                 id: ref.documentID,
                 videoUrl: videoUrl,
@@ -35,8 +33,21 @@ struct UploadPostService {
 
             guard let postData = try? Firestore.Encoder().encode(post) else { return }
             try await ref.setData(postData)
+            async let _ = try updateThumbnailUrl(fromVideoUrl: videoUrl, postId: ref.documentID)
         } catch {
             print("DEBUG: Failed to upload image with error \(error.localizedDescription)")
+            throw error
+        }
+    }
+    
+    func updateThumbnailUrl(fromVideoUrl videoUrl: String, postId: String) async throws {
+        do {
+            guard let image = MediaHelpers.generateThumbnail(path: videoUrl) else { return }
+            guard let thumbnailUrl = try await ImageUploader.uploadImage(image: image, type: .post) else { return }
+            try await FirestoreConstants.PostsCollection.document(postId).updateData([
+                "thumbnailUrl": thumbnailUrl
+            ])
+        } catch {
             throw error
         }
     }

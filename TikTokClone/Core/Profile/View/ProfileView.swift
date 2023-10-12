@@ -15,18 +15,20 @@ struct ProfileView: View {
     }
     
     init(user: User) {
-        self._viewModel = StateObject(wrappedValue: ProfileViewModel(user: user))
+        let profileViewModel = ProfileViewModel(user: user, userService: UserService())
+        self._viewModel = StateObject(wrappedValue: profileViewModel)
     }
     
     var body: some View {
         ScrollView {
             VStack(spacing: 2) {
-                ProfileHeaderView(user: $viewModel.user)
+                ProfileHeaderView(viewModel: viewModel)
                 
                 PostGridView(viewModel: viewModel)
             }
         }
         .task { await viewModel.fetchPosts() }
+        .task { await viewModel.checkIfUserIsFollowed() }
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle(user.username)
     }

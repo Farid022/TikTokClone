@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct CurrentUserProfileView: View {
-    let service: AuthService
+    let authService: AuthService
     let user: User
     @StateObject var profileViewModel: ProfileViewModel
     
-    init(service: AuthService, user: User) {
-        self.service = service
+    init(authService: AuthService, user: User) {
+        self.authService = authService
         self.user = user
-        self._profileViewModel = StateObject(wrappedValue: ProfileViewModel(user: user))
+        
+        let viewModel = ProfileViewModel(user: user, userService: UserService())
+        self._profileViewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 2) {
-                    ProfileHeaderView(user: $profileViewModel.user)
+                    ProfileHeaderView(viewModel: profileViewModel)
                         .padding(.top)
                     
                     PostGridView(viewModel: profileViewModel)
@@ -31,7 +33,7 @@ struct CurrentUserProfileView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        service.signout()
+                        authService.signout()
                     } label: {
                         Image(systemName: "line.3.horizontal")
                     }
@@ -45,5 +47,6 @@ struct CurrentUserProfileView: View {
 }
 
 #Preview {
-    CurrentUserProfileView(service: AuthService(), user: DeveloperPreview.user)
+    CurrentUserProfileView(authService: AuthService(),
+                           user: DeveloperPreview.user)
 }

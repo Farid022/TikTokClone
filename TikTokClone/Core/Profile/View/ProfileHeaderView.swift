@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ProfileHeaderView: View {
     @State private var showEditProfile = false
-    @Binding var user: User
+    @ObservedObject var viewModel: ProfileViewModel
+    
+    private var user: User {
+        return viewModel.user
+    }
     
     var body: some View {
         VStack(spacing: 16) {
@@ -23,11 +27,11 @@ struct ProfileHeaderView: View {
             
             // stats view
             HStack(spacing: 16) {
-                UserStatView(value: user.stats?.following, title: "Following")
+                UserStatView(value: user.stats.following, title: "Following")
 
-                UserStatView(value: user.stats?.followers, title: "Followers")
+                UserStatView(value: user.stats.followers, title: "Followers")
                 
-                UserStatView(value: user.stats?.likes, title: "Likes")
+                UserStatView(value: user.stats.likes, title: "Likes")
             }
             
             // action button view
@@ -44,14 +48,19 @@ struct ProfileHeaderView: View {
                 }
             } else {
                 Button {
-                    
+                    handleFollowTapped()
                 } label: {
-                    Text("Follow")
-                        .font(.system(size: 14, weight: .semibold))
+                    Text(user.isFollowed ? "Following" : "Follow")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
                         .frame(width: 360, height: 32)
-                        .foregroundStyle(.white)
-                        .background(.pink)
+                        .foregroundStyle(user.isFollowed ? .black : .white)
+                        .background(user.isFollowed ? .white : .pink)
                         .clipShape(RoundedRectangle(cornerRadius: 6))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(Color.gray, lineWidth: user.isFollowed ? 1 : 0)
+                        }
                 }
             }
             
@@ -64,18 +73,22 @@ struct ProfileHeaderView: View {
             Divider()
         }
         .fullScreenCover(isPresented: $showEditProfile) {
-            EditProfileView(user: $user)
+            EditProfileView(user: $viewModel.user)
         }
+    }
+    
+    func handleFollowTapped() {
+        user.isFollowed ? viewModel.unfollow() : viewModel.follow()
     }
 }
 
 struct UserStatView: View {
-    let value: Int?
+    let value: Int
     let title: String
     
     var body: some View {
         VStack {
-            Text("\(value ?? 40)")
+            Text("\(value)")
                 .font(.subheadline)
                 .fontWeight(.bold)
             
@@ -89,5 +102,6 @@ struct UserStatView: View {
 }
 
 #Preview {
-    ProfileHeaderView(user: .constant(DeveloperPreview.user))
+    ProfileHeaderView(viewModel: ProfileViewModel(user: DeveloperPreview.user,
+                                                  userService: UserService()))
 }

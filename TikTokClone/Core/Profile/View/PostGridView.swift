@@ -33,5 +33,5 @@ struct PostGridView: View {
 }
 
 #Preview {
-    PostGridView(viewModel: ProfileViewModel(user: DeveloperPreview.user))
+    PostGridView(viewModel: ProfileViewModel(user: DeveloperPreview.user, userService: UserService()))
 }

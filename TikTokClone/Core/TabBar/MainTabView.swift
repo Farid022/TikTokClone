@@ -64,7 +64,7 @@ struct MainTabView: View {
                 .tag(3)
                 
 
-            CurrentUserProfileView(service: authService, user: user)
+            CurrentUserProfileView(authService: authService, user: user)
                 .tabItem {
                     VStack {
                         Image(systemName: selectedTab == 4 ? "person.fill" : "person")
@@ -76,12 +76,8 @@ struct MainTabView: View {
                 .onAppear { selectedTab = 4 }
                 .tag(4)
         }
-        .onAppear {
-            configurePlaybackObserver()
-        }
-        .onDisappear {
-            removePlaybackObserver()
-        }
+        .onAppear { configurePlaybackObserver() }
+        .onDisappear { removePlaybackObserver() }
         .tint(selectedTab == 0 ? .white : .black)
     }
     

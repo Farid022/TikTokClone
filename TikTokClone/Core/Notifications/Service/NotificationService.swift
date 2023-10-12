@@ -45,18 +45,16 @@ class NotificationService {
         guard uid != currentUid else { return }
         
         let snapshot = try await FirestoreConstants
-            .NotificationsCollection
-            .document(uid)
-            .collection("user-notifications")
+            .UserNotificationCollection(uid: uid)
             .whereField("uid", isEqualTo: currentUid)
             .getDocuments()
         
         for document in snapshot.documents {
-            let notification = try? document.data(as: Notification.self)
-            guard notification?.type == type else { return }
+            guard let notification = try? document.data(as: Notification.self) else { continue }
+            guard notification.type == type else { return }
             
             if postId != nil {
-                guard postId == notification?.postId else { return }
+                guard postId == notification.postId else { return }
             }
             
             try await document.reference.delete()
@@ -69,10 +67,10 @@ class NotificationService {
         async let notificationUser = try userService.fetchUser(withUid: notification.uid)
         self.notifications[indexOfNotification].user = try await notificationUser
 
-//        if notification.type == .follow {
-//            async let isFollowed = UserService.checkIfUserIsFollowed(uid: notification.uid)
-//            self.notifications[indexOfNotification].isFollowed = await isFollowed
-//        }
+        if notification.type == .follow {
+            async let isFollowed = userService.checkIfUserIsFollowed(uid: notification.uid)
+            self.notifications[indexOfNotification].user?.isFollowed = await isFollowed
+        }
 
         if let postId = notification.postId {
             self.notifications[indexOfNotification].post = try? await postService.fetchPost(postId: postId)

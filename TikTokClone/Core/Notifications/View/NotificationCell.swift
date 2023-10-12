@@ -29,13 +29,15 @@ struct NotificationCell: View {
                 
                 HStack {
                     Text(notification.user?.username ?? "")
-                        .font(.system(size: 14, weight: .semibold)) +
+                        .font(.footnote)
+                        .fontWeight(.semibold) +
                     
                     Text(notification.type.notificationMessage)
-                        .font(.system(size: 14)) +
+                        .font(.footnote) +
                     
                     Text(" \(notification.timestamp.timestampString())")
-                        .foregroundColor(.gray).font(.system(size: 12))
+                        .foregroundColor(.gray)
+                        .font(.caption)
                 }
                 .multilineTextAlignment(.leading)
             }
@@ -47,7 +49,8 @@ struct NotificationCell: View {
                     isFollowed ? viewModel.unfollow() : viewModel.follow()
                 }, label: {
                     Text(isFollowed ? "Following" : "Follow")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
                         .frame(width: 88, height: 32)
                         .foregroundColor(isFollowed ? .black : .white)
                         .background(isFollowed ? Color(.systemGroupedBackground) : Color.pink)

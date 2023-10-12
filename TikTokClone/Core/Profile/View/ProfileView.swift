@@ -29,6 +29,7 @@ struct ProfileView: View {
         }
         .task { await viewModel.fetchPosts() }
         .task { await viewModel.checkIfUserIsFollowed() }
+        .task { await viewModel.fetchUserStats() }
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle(user.username)
     }

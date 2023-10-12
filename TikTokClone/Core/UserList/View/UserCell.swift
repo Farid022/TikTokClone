@@ -29,16 +29,16 @@ struct UserCell: View {
             
             Spacer()
             
-            Button {
-                
-            } label: {
-                Text("Follow")
-                    .font(.system(size: 14, weight: .semibold))
-                    .frame(width: 88, height: 32)
-                    .foregroundColor(.white)
-                    .background(.pink)
-                    .cornerRadius(6)
-            }
+//            Button {
+//                
+//            } label: {
+//                Text("Follow")
+//                    .font(.system(size: 14, weight: .semibold))
+//                    .frame(width: 88, height: 32)
+//                    .foregroundColor(.white)
+//                    .background(.pink)
+//                    .cornerRadius(6)
+//            }
         }
     }
 }

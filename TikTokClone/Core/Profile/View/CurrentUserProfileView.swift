@@ -40,6 +40,7 @@ struct CurrentUserProfileView: View {
                 }
             }
             .task { await profileViewModel.fetchPosts() }
+            .task { await profileViewModel.fetchUserStats() }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
         }

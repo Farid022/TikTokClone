@@ -93,7 +93,8 @@ struct LoginView: View {
 
             }
             .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text("Error"), message: Text("Please try again.."))
+                Alert(title: Text("Error"), 
+                      message: Text(viewModel.authError?.description ?? "Please try again.."))
             }
         }
     }

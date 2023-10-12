@@ -15,6 +15,7 @@ class ProfileViewModel: ObservableObject {
     
     private let userService: UserService
     private var didCompleteFollowCheck = false
+    private var didCompleteStatsFetch = false
     
     init(user: User, userService: UserService) {
         self.user = user
@@ -51,6 +52,21 @@ extension ProfileViewModel {
         guard !user.isCurrentUser, !didCompleteFollowCheck else { return }
         self.user.isFollowed = await userService.checkIfUserIsFollowed(uid: user.id)
         self.didCompleteFollowCheck = true
+    }
+}
+
+// MARK: - Stats
+
+extension ProfileViewModel {
+    func fetchUserStats() async {
+        guard !didCompleteStatsFetch else { return }
+        
+        do {
+            user.stats = try await userService.fetchUserStats(uid: user.id)
+            didCompleteStatsFetch = true
+        } catch {
+            print("DEBUG: Failed to fetch user stats with error \(error.localizedDescription)")
+        }
     }
 }
 

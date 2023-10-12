@@ -19,9 +19,11 @@ struct NotificationsView: View {
                             .padding(.top)
                     }
                 }
-                .navigationTitle("Notifications")
-                .navigationBarTitleDisplayMode(.inline)
+
             }
+            .navigationTitle("Notifications")
+            .navigationBarTitleDisplayMode(.inline)
+            .refreshable { await viewModel.fetchNotifications() }
             .overlay {
                 if viewModel.isLoading {
                     ProgressView()

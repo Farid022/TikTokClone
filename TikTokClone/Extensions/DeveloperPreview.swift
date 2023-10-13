@@ -20,7 +20,6 @@ struct DeveloperPreview {
     )
     
     static let videoUrls =  [
-        "https://firebasestorage.googleapis.com:443/v0/b/tiktok-162bf.appspot.com/o/post_videos%2FB65A78A7-1CFA-4239-B0BC-88AF8BDBC165?alt=media&token=d0c1bd8e-c06c-4913-8a8e-2fc0fd25b905",
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",

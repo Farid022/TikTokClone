@@ -15,17 +15,7 @@ struct FeedCell: View {
     @State private var expandCaption = false
     @State private var showComments = false
         
-//    var post: Post? {
-//        return viewModel.currentPost
-//    }
-    
-    
     private var didLike: Bool { return post.didLike }
-    
-//    init(player: AVPlayer, viewModel: FeedViewModel) {
-//        self.player = player
-//        self.viewModel = viewModel
-//    }
     
     var body: some View {
         ZStack {

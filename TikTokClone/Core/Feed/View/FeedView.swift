@@ -88,6 +88,6 @@ struct FeedView: View {
     }
 }
 
-//#Preview {
-//    FeedView(currentUser: DeveloperPreview.user)
-//}
+#Preview {
+    FeedView(player: .constant(AVPlayer()), posts: DeveloperPreview.posts)
+}

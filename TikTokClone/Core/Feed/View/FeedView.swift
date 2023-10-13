@@ -34,11 +34,13 @@ struct FeedView: View {
                 }
                 .scrollTargetLayout()
             }
-            
+            .refreshable {
+                Task { await viewModel.fetchPosts() }
+            }
             .background(.black)
             .onAppear { player.play() }
             .onDisappear { player.pause() }
-            .overlay { 
+            .overlay {
                 if viewModel.isLoading { 
                     ProgressView()
                 } else if viewModel.showEmptyView {

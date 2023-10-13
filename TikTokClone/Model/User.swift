@@ -48,8 +48,6 @@ struct User: Identifiable, Codable {
 
 extension User: Hashable { }
 
-
-
 struct UserStats: Codable, Hashable {
     var following: Int
     var followers: Int

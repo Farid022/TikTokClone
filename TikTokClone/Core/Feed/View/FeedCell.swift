@@ -19,9 +19,8 @@ struct FeedCell: View {
     }
     
     private var didLike: Bool { return post?.didLike ?? false }
-    private var didSave: Bool { return post?.didSave ?? false }
     
-    init(post: Post, player: AVPlayer, viewModel: FeedViewModel) {
+    init(player: AVPlayer, viewModel: FeedViewModel) {
         self.player = player
         self.viewModel = viewModel
     }
@@ -72,7 +71,7 @@ struct FeedCell: View {
                             Button {
                                 handleLikeTapped()
                             } label: {
-                                FeedItemActionButtonView(imageName: "heart.fill", 
+                                FeedCellActionButtonView(imageName: "heart.fill", 
                                                          value: post?.likes ?? 0,
                                                          tintColor: didLike ? .red : .white)
                             }
@@ -81,23 +80,23 @@ struct FeedCell: View {
                                 player.pause()
                                 showComments.toggle()
                             } label: {
-                                FeedItemActionButtonView(imageName: "ellipsis.bubble.fill", value: post?.commentCount ?? 0)
-                            }
-                            
-                            Button {
-                                handleSaveTapped()
-                            } label: {
-                                FeedItemActionButtonView(imageName: "bookmark.fill",
-                                                         value: post?.saveCount ?? 0,
-                                                         height: 28,
-                                                         width: 22,
-                                                         tintColor: didSave ? .yellow : .white)
+                                FeedCellActionButtonView(imageName: "ellipsis.bubble.fill", value: post?.commentCount ?? 0)
                             }
                             
                             Button {
                                 
                             } label: {
-                                FeedItemActionButtonView(imageName: "arrowshape.turn.up.right.fill", value: post?.shareCount ?? 0)
+                                FeedCellActionButtonView(imageName: "bookmark.fill",
+                                                         value: post?.saveCount ?? 0,
+                                                         height: 28,
+                                                         width: 22,
+                                                         tintColor: .white)
+                            }
+                            
+                            Button {
+                                
+                            } label: {
+                                FeedCellActionButtonView(imageName: "arrowshape.turn.up.right.fill", value: post?.shareCount ?? 0)
                             }
                         }
                         .padding()
@@ -131,36 +130,8 @@ struct FeedCell: View {
         guard let post else { return }
         Task { didLike ? await viewModel.unlike(post) : await viewModel.like(post) }
     }
-    
-    private func handleSaveTapped() {
-//        Task { (post.didSave ?? false) ? await viewModel.unsave() : await viewModel.save() }
-    }
 }
 
-struct FeedItemActionButtonView: View {
-    let imageName: String
-    let value: Int
-    var height: CGFloat? = 28
-    var width: CGFloat? = 28
-    var tintColor: Color?
-    
-    var body: some View {
-        VStack {
-            Image(systemName: imageName)
-                .resizable()
-                .frame(width: width, height: height)
-                .foregroundStyle(tintColor ?? .white)
-            
-            if value > 0 {
-                Text("\(value)")
-                    .font(.caption)
-                    .fontWeight(.bold)
-            }
-        }
-        .foregroundStyle(.white)
-    }
+#Preview {
+    FeedCell(player: AVPlayer(), viewModel: FeedViewModel(feedService: FeedService(), postService: PostService()))
 }
-
-//#Preview {
-//    FeedCell(post: DeveloperPreview.posts[0])
-//}

@@ -103,6 +103,7 @@
 		2B1E9E002AD7004D00902AE1 /* NotifcationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9DFF2AD7004D00902AE1 /* NotifcationManager.swift */; };
 		2B1E9E022AD71CEE00902AE1 /* Firestore+Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9E012AD71CEE00902AE1 /* Firestore+Timestamp.swift */; };
 		2B1E9E082AD86D9800902AE1 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9E072AD86D9800902AE1 /* ProfileService.swift */; };
+		2B1E9E112AD9A34E00902AE1 /* FeedCellActionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E9E102AD9A34E00902AE1 /* FeedCellActionButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -175,6 +176,7 @@
 		2B1E9DFF2AD7004D00902AE1 /* NotifcationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifcationManager.swift; sourceTree = "<group>"; };
 		2B1E9E012AD71CEE00902AE1 /* Firestore+Timestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Timestamp.swift"; sourceTree = "<group>"; };
 		2B1E9E072AD86D9800902AE1 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		2B1E9E102AD9A34E00902AE1 /* FeedCellActionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellActionButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -419,6 +421,7 @@
 				2B1E9D0D2AD0549800902AE1 /* FeedView.swift */,
 				2B1E9D1D2AD3054F00902AE1 /* FeedCell.swift */,
 				2B1E9D282AD32C0100902AE1 /* ScrollViewStuff.swift */,
+				2B1E9E102AD9A34E00902AE1 /* FeedCellActionButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				2B1E9D852AD49F6A00902AE1 /* UserListConfig.swift in Sources */,
 				2B1E9D6B2AD47C6700902AE1 /* CommentInputView.swift in Sources */,
 				2B1E9D9B2AD4A53700902AE1 /* NotificationCellViewModel.swift in Sources */,
+				2B1E9E112AD9A34E00902AE1 /* FeedCellActionButtonView.swift in Sources */,
 				2B1E9CF12AD052B700902AE1 /* ContentView.swift in Sources */,
 				2B1E9D222AD3239500902AE1 /* DeveloperPreview.swift in Sources */,
 				2B1E9E022AD71CEE00902AE1 /* Firestore+Timestamp.swift in Sources */,

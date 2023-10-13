@@ -27,7 +27,7 @@ struct FeedView: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(viewModel.posts) { post in
-                        FeedCell(post: post, player: player, viewModel: viewModel)
+                        FeedCell(player: player, viewModel: viewModel)
                             .id(post.id)
                             .onAppear { playInitialVideoIfNecessary(forPost: post) }
                     }

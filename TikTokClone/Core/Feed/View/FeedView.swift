@@ -24,18 +24,28 @@ struct FeedView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    ForEach(viewModel.posts) { post in
-                        FeedCell(player: player, viewModel: viewModel)
-                            .id(post.id)
-                            .onAppear { playInitialVideoIfNecessary(forPost: post) }
+            ZStack(alignment: .topTrailing) {
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        ForEach($viewModel.posts) { post in
+                            FeedCell(post: post, player: player, viewModel: viewModel)
+                                .id(post.id)
+                                .onAppear { playInitialVideoIfNecessary(forPost: post.wrappedValue) }
+                                
+                        }
                     }
+                    .scrollTargetLayout()
                 }
-                .scrollTargetLayout()
-            }
-            .refreshable {
-                Task { await viewModel.fetchPosts() }
+                
+                Button {
+                    Task { await viewModel.refreshFeed() }
+                } label: {
+                    Image(systemName: "arrow.counterclockwise")
+                        .imageScale(.large)
+                        .foregroundStyle(.white)
+                        .shadow(radius: 4)
+                        .padding(32)
+                }
             }
             .background(.black)
             .onAppear { player.play() }
@@ -71,7 +81,6 @@ struct FeedView: View {
     
     func playVideoOnChangeOfScrollPosition(postId: String?) {
         guard let currentPost = viewModel.posts.first(where: {$0.id == postId }) else { return }
-        viewModel.currentPost = currentPost
         
         player.replaceCurrentItem(with: nil)
         let playerItem = AVPlayerItem(url: URL(string: currentPost.videoUrl)!)

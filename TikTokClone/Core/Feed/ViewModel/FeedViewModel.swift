@@ -12,7 +12,6 @@ class FeedViewModel: ObservableObject {
     @Published var posts = [Post]()
     @Published var isLoading = false
     @Published var showEmptyView = false
-    @Published var currentPost: Post?
     
     private let feedService: FeedService
     private let postService: PostService
@@ -35,13 +34,26 @@ class FeedViewModel: ObservableObject {
                 posts = try await feedService.fetchPosts()
                 posts.shuffle()
             }
-            currentPost = posts.first
             isLoading = false
             showEmptyView = posts.isEmpty
             await checkIfUserLikedPosts()
         } catch {
             isLoading = false
             print("DEBUG: Failed to fetch posts \(error.localizedDescription)")
+        }
+    }
+    
+    func refreshFeed() async {
+        posts.removeAll()
+        isLoading = true
+        
+        do {
+            posts = try await feedService.fetchPosts()
+            posts.shuffle()
+            isLoading = false
+        } catch {
+            isLoading = false
+            print("DEBUG: Failed to refresh posts with error: \(error.localizedDescription)")
         }
     }
 }
@@ -53,9 +65,7 @@ extension FeedViewModel {
         guard let index = posts.firstIndex(where: { $0.id == post.id }) else { return }
         posts[index].didLike = true
         posts[index].likes += 1
-        
-        currentPost = posts[index]
-        
+                
         do {
             try await postService.likePost(post)
         } catch {
@@ -69,9 +79,7 @@ extension FeedViewModel {
         guard let index = posts.firstIndex(where: { $0.id == post.id }) else { return }
         posts[index].didLike = false
         posts[index].likes -= 1
-        
-        currentPost = posts[index]
-        
+                
         do {
             try await postService.unlikePost(post)
         } catch {
@@ -91,7 +99,6 @@ extension FeedViewModel {
                 let didLike = try await self.postService.checkIfUserLikedPost(post)
                 
                 if didLike {
-                    currentPost?.didLike = didLike
                     copy[i].didLike = didLike
                 }
                 

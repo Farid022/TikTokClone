@@ -102,7 +102,7 @@ struct FeedCell: View {
                         }
                         .padding()
                     }
-                    .padding(.bottom, 80)
+                    .padding(.bottom, viewModel.isContainedInTabBar ? 80 : 12)
                 }
             }
             .sheet(isPresented: $showComments) {

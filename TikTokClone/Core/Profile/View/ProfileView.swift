@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel
+    @Environment(\.dismiss) var dismiss
     
     private var user: User {
         return viewModel.user
@@ -19,6 +20,8 @@ struct ProfileView: View {
                                                 userService: UserService(),
                                                 postService: PostService())
         self._viewModel = StateObject(wrappedValue: profileViewModel)
+        
+        UINavigationBar.appearance().tintColor = .primaryText
     }
     
     var body: some View {
@@ -32,8 +35,19 @@ struct ProfileView: View {
         .task { await viewModel.fetchUserPosts() }
         .task { await viewModel.checkIfUserIsFollowed() }
         .task { await viewModel.fetchUserStats() }
-        .toolbar(.hidden, for: .tabBar)
         .navigationTitle(user.username)
+        .toolbar(.hidden, for: .tabBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(.primaryText)
+                }
+            }
+        }
+        .navigationBarBackButtonHidden()
     }
 }
 

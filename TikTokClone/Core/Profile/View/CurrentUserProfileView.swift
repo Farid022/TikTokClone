@@ -34,11 +34,11 @@ struct CurrentUserProfileView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+                    Button("Sign Out") {
                         authService.signout()
-                    } label: {
-                        Image(systemName: "line.3.horizontal")
                     }
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
                 }
             }
             .task { await profileViewModel.fetchUserPosts() }

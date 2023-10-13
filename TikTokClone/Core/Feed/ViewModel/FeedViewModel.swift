@@ -16,11 +16,13 @@ class FeedViewModel: ObservableObject {
     
     private let feedService: FeedService
     private let postService: PostService
+    var isContainedInTabBar = true
 
     init(feedService: FeedService, postService: PostService, posts: [Post] = []) {
         self.feedService = feedService
         self.postService = postService
         self.posts = posts
+        self.isContainedInTabBar = posts.isEmpty
         
         Task { await fetchPosts() }
     }
@@ -29,11 +31,13 @@ class FeedViewModel: ObservableObject {
         isLoading = true
         
         do {
-            if posts.isEmpty { self.posts = try await feedService.fetchPosts() }
-            posts.shuffle()
-            self.currentPost = posts.first
+            if posts.isEmpty {
+                posts = try await feedService.fetchPosts()
+                posts.shuffle()
+            }
+            currentPost = posts.first
             isLoading = false
-            self.showEmptyView = posts.isEmpty
+            showEmptyView = posts.isEmpty
             await checkIfUserLikedPosts()
         } catch {
             isLoading = false
@@ -52,13 +56,13 @@ extension FeedViewModel {
         
         currentPost = posts[index]
         
-//        do {
-//            try await postService.likePost(post)
-//        } catch {
-//            print("DEBUG: Failed to like post with error \(error.localizedDescription)")
-//            posts[index].didLike = false
-//            posts[index].likes -= 1
-//        }
+        do {
+            try await postService.likePost(post)
+        } catch {
+            print("DEBUG: Failed to like post with error \(error.localizedDescription)")
+            posts[index].didLike = false
+            posts[index].likes -= 1
+        }
     }
     
     func unlike(_ post: Post) async {
@@ -68,13 +72,13 @@ extension FeedViewModel {
         
         currentPost = posts[index]
         
-//        do {
-//            try await postService.unlikePost(post)
-//        } catch {
-//            print("DEBUG: Failed to unlike post with error \(error.localizedDescription)")
-//            posts[index].didLike = true
-//            posts[index].likes += 1
-//        }
+        do {
+            try await postService.unlikePost(post)
+        } catch {
+            print("DEBUG: Failed to unlike post with error \(error.localizedDescription)")
+            posts[index].didLike = true
+            posts[index].likes += 1
+        }
     }
     
     func checkIfUserLikedPosts() async {

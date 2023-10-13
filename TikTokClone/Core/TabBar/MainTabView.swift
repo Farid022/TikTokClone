@@ -62,7 +62,6 @@ struct MainTabView: View {
                 }
                 .onAppear { selectedTab = 3 }
                 .tag(3)
-                
 
             CurrentUserProfileView(authService: authService, user: user)
                 .tabItem {
@@ -78,7 +77,7 @@ struct MainTabView: View {
         }
         .onAppear { configurePlaybackObserver() }
         .onDisappear { removePlaybackObserver() }
-        .tint(selectedTab == 0 ? .white : .black)
+        .tint(selectedTab == 0 ? .white : .primaryText)
     }
     
     func configurePlaybackObserver() {

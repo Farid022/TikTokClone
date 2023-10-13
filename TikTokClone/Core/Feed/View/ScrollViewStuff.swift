@@ -7,18 +7,31 @@
 
 import SwiftUI
 
+class ScrollViewStuffViewModel: ObservableObject {
+    @Published var items = [Int]()
+    
+    init() {
+        self.items = Array(0 ..< 100)
+    }
+}
+
 struct ScrollViewStuff: View {
     @State private var position: Int?
     @State private var showingFirst = false
     @State private var showingSecond = false
+    @StateObject var viewModel = ScrollViewStuffViewModel()
     
     var body: some View {
         VStack {
             Text("Position: \(position ?? 0)")
+            Button("Scroll To Bottom") {
+                position = 99
+            }
             ScrollView(.vertical) {
                 LazyVStack(spacing: 0) {
-                    ForEach(0 ..< 100) { index in
+                    ForEach(viewModel.items, id: \.self) { index in
                         ScrollViewStuffCell(index: index)
+                            .environmentObject(viewModel)
                             .id(index)
                             .onTapGesture {
                                 showingFirst.toggle()
@@ -48,6 +61,7 @@ struct ScrollViewStuff: View {
 
 struct ScrollViewStuffCell: View {
     let index: Int
+    @EnvironmentObject var viewModel: ScrollViewStuffViewModel
     
     init(index: Int) {
         self.index = index
@@ -57,7 +71,7 @@ struct ScrollViewStuffCell: View {
     var body: some View {
         Rectangle()
             .fill(Color.green)
-            .overlay(Text("\(index)"))
+            .overlay(Text("\(index) / \(viewModel.items.count)"))
             .containerRelativeFrame([.horizontal, .vertical])
     }
 }

@@ -6,26 +6,29 @@
 //
 
 import Foundation
-
+import Combine
 
 @MainActor
 class CommentViewModel: ObservableObject {
     @Published var comments = [Comment]()
     @Published var commentText = "" 
     @Published var showEmptyView = false
+    @Published var currentUser: User?
     
     private let post: Post
     private let service: CommentService
-    private let currentUser: User
+    
+    private var cancellables = Set<AnyCancellable>()
     
     var commentCountText: String {
         return "\(comments.count) comments"
     }
     
-    init(post: Post, service: CommentService, currentUser: User) {
+    init(post: Post, service: CommentService) {
         self.post = post
         self.service = service
-        self.currentUser = currentUser
+        
+        setupSubscribers()
     }
     
     func fetchComments() async {
@@ -41,12 +44,19 @@ class CommentViewModel: ObservableObject {
         guard !commentText.isEmpty else { return }
         
         do {
-            guard var comment = try await service.uploadComment(commentText: commentText) else { return }
+            guard let comment = try await service.uploadComment(commentText: commentText) else { return }
             commentText = ""
-            comment.user = currentUser
             comments.insert(comment, at: 0)
+            
+            if showEmptyView { showEmptyView.toggle() }
         } catch {
             print("DEBUG: Failed to upload comment with error \(error.localizedDescription)")
         }
+    }
+    
+    private func setupSubscribers() {
+        service.$currentUser.sink { [weak self] user in
+            self?.currentUser = user
+        }.store(in: &cancellables)
     }
 }

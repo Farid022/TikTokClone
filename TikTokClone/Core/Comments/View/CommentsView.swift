@@ -9,12 +9,10 @@ import SwiftUI
 
 struct CommentsView: View {
     @StateObject var viewModel: CommentViewModel
-    private let currentUser: User
     
-    init(post: Post, currentUser: User) {
-        self.currentUser = currentUser
-        let service = CommentService(post: post)
-        let viewModel = CommentViewModel(post: post, service: service, currentUser: currentUser)
+    init(post: Post) {
+        let service = CommentService(post: post, userService: UserService())
+        let viewModel = CommentViewModel(post: post, service: service)
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -43,7 +41,7 @@ struct CommentsView: View {
                 .padding(.bottom)
             
             HStack(spacing: 12) {
-                CircularProfileImageView(user: currentUser, size: .xSmall)
+                CircularProfileImageView(user: viewModel.currentUser, size: .xSmall)
                 
                 CommentInputView(viewModel: viewModel)
             }
@@ -61,5 +59,5 @@ struct CommentsView: View {
 }
 
 #Preview {
-    CommentsView(post: DeveloperPreview.posts[0], currentUser: DeveloperPreview.user)
+    CommentsView(post: DeveloperPreview.posts[0])
 }

@@ -13,16 +13,15 @@ struct FeedCell: View {
     @ObservedObject var viewModel: FeedViewModel
     @State private var expandCaption = false
     @State private var showComments = false
+        
+    var post: Post? {
+        return viewModel.currentPost
+    }
     
-    private let currentUser: User
-    @Binding var post: Post
+    private var didLike: Bool { return post?.didLike ?? false }
+    private var didSave: Bool { return post?.didSave ?? false }
     
-    private var didLike: Bool { return post.didLike }
-    private var didSave: Bool { return post.didSave }
-    
-    init(post: Binding<Post>, player: AVPlayer, currentUser: User, viewModel: FeedViewModel) {
-        self._post = post
-        self.currentUser = currentUser
+    init(post: Post, player: AVPlayer, viewModel: FeedViewModel) {
         self.player = player
         self.viewModel = viewModel
     }
@@ -43,12 +42,12 @@ struct FeedCell: View {
                     
                     HStack(alignment: .bottom) {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text(post.user?.username ?? "")
+                            Text(post?.user?.username ?? "")
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .foregroundStyle(.white)
                             
-                            Text(post.caption)
+                            Text(post?.caption ?? "")
                                 .lineLimit(expandCaption ? 50 : 2)
                             
                         }
@@ -60,9 +59,9 @@ struct FeedCell: View {
                         Spacer()
                         
                         VStack(spacing: 28) {
-                            NavigationLink(value: post.user) {
+                            NavigationLink(value: post?.user) {
                                 ZStack(alignment: .bottom) {
-                                    CircularProfileImageView(user: post.user, size: .medium)
+                                    CircularProfileImageView(user: post?.user, size: .medium)
                                     
                                     Image(systemName: "plus.circle.fill")
                                         .foregroundStyle(.pink)
@@ -73,26 +72,32 @@ struct FeedCell: View {
                             Button {
                                 handleLikeTapped()
                             } label: {
-                                FeedItemActionButtonView(imageName: "heart.fill", value: post.likes, tintColor: didLike ? .red : .white)
+                                FeedItemActionButtonView(imageName: "heart.fill", 
+                                                         value: post?.likes ?? 0,
+                                                         tintColor: didLike ? .red : .white)
                             }
                             
                             Button {
                                 player.pause()
                                 showComments.toggle()
                             } label: {
-                                FeedItemActionButtonView(imageName: "ellipsis.bubble.fill", value: post.commentCount)
+                                FeedItemActionButtonView(imageName: "ellipsis.bubble.fill", value: post?.commentCount ?? 0)
                             }
                             
                             Button {
                                 handleSaveTapped()
                             } label: {
-                                FeedItemActionButtonView(imageName: "bookmark.fill", value: post.saveCount, height: 28, width: 22, tintColor: didSave ? .yellow : .white)
+                                FeedItemActionButtonView(imageName: "bookmark.fill",
+                                                         value: post?.saveCount ?? 0,
+                                                         height: 28,
+                                                         width: 22,
+                                                         tintColor: didSave ? .yellow : .white)
                             }
                             
                             Button {
                                 
                             } label: {
-                                FeedItemActionButtonView(imageName: "arrowshape.turn.up.right.fill", value: post.shareCount)
+                                FeedItemActionButtonView(imageName: "arrowshape.turn.up.right.fill", value: post?.shareCount ?? 0)
                             }
                         }
                         .padding()
@@ -101,8 +106,11 @@ struct FeedCell: View {
                 }
             }
             .sheet(isPresented: $showComments) {
-                CommentsView(post: post, currentUser: currentUser)
-                    .presentationDetents([.height(UIScreen.main.bounds.height * 0.65)])
+                if let post {
+                    CommentsView(post: post)
+                        .presentationDetents([.height(UIScreen.main.bounds.height * 0.65)])
+                        .presentationBackgroundInteraction(.enabled(upThrough: .large))
+                }
             }
             .onTapGesture {
                 switch player.timeControlStatus {
@@ -120,6 +128,7 @@ struct FeedCell: View {
     }
     
     private func handleLikeTapped() {
+        guard let post else { return }
         Task { didLike ? await viewModel.unlike(post) : await viewModel.like(post) }
     }
     

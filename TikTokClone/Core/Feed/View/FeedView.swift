@@ -10,22 +10,31 @@ import AVKit
 
 struct FeedView: View {
     @Binding var player: AVPlayer
-    @StateObject var viewModel = FeedViewModel(feedService: FeedService(), postService: PostService())
+    @StateObject var viewModel: FeedViewModel
     @State private var scrollPosition: String?
-    let currentUser: User
-
+    
+    init(player: Binding<AVPlayer>, posts: [Post] = []) {
+        self._player = player
+        
+        let viewModel = FeedViewModel(feedService: FeedService(),
+                                      postService: PostService(),
+                                      posts: posts)
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    ForEach($viewModel.posts) { post in
-                        FeedCell(post: post, player: player, currentUser: currentUser, viewModel: viewModel)
+                    ForEach(viewModel.posts) { post in
+                        FeedCell(post: post, player: player, viewModel: viewModel)
                             .id(post.id)
-                            .onAppear { playInitialVideoIfNecessary(forPost: post.wrappedValue) }
+                            .onAppear { playInitialVideoIfNecessary(forPost: post) }
                     }
                 }
                 .scrollTargetLayout()
             }
+            
             .background(.black)
             .onAppear { player.play() }
             .onDisappear { player.pause() }
@@ -60,6 +69,7 @@ struct FeedView: View {
     
     func playVideoOnChangeOfScrollPosition(postId: String?) {
         guard let currentPost = viewModel.posts.first(where: {$0.id == postId }) else { return }
+        viewModel.currentPost = currentPost
         
         player.replaceCurrentItem(with: nil)
         let playerItem = AVPlayerItem(url: URL(string: currentPost.videoUrl)!)

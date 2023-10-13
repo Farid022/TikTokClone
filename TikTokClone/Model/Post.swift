@@ -78,6 +78,8 @@ struct Post: Identifiable, Codable {
     }
 }
 
+extension Post: Hashable { }
+
 extension Post: Equatable {
     static func == (lhs: Post, rhs: Post) -> Bool {
         return lhs.id == rhs.id

@@ -21,7 +21,7 @@ struct MainTabView: View {
         
     var body: some View {
         TabView(selection: $selectedTab) {
-            FeedView(player: $player, currentUser: user)
+            FeedView(player: $player)
                 .toolbarBackground(.black, for: .tabBar)
                 .tabItem {
                     VStack {

@@ -12,12 +12,15 @@ class FeedViewModel: ObservableObject {
     @Published var posts = [Post]()
     @Published var isLoading = false
     @Published var showEmptyView = false
+    @Published var currentPost: Post?
+    
     private let feedService: FeedService
     private let postService: PostService
 
-    init(feedService: FeedService, postService: PostService) {
+    init(feedService: FeedService, postService: PostService, posts: [Post] = []) {
         self.feedService = feedService
         self.postService = postService
+        self.posts = posts
         
         Task { await fetchPosts() }
     }
@@ -26,10 +29,12 @@ class FeedViewModel: ObservableObject {
         isLoading = true
         
         do {
-            self.posts = try await feedService.fetchPosts()
+            if posts.isEmpty { self.posts = try await feedService.fetchPosts() }
+            posts.shuffle()
+            self.currentPost = posts.first
             isLoading = false
-            await checkIfUserLikedPosts()
             self.showEmptyView = posts.isEmpty
+            await checkIfUserLikedPosts()
         } catch {
             isLoading = false
             print("DEBUG: Failed to fetch posts \(error.localizedDescription)")
@@ -45,13 +50,15 @@ extension FeedViewModel {
         posts[index].didLike = true
         posts[index].likes += 1
         
-        do {
-            try await postService.likePost(post)
-        } catch {
-            print("DEBUG: Failed to like post with error \(error.localizedDescription)")
-            posts[index].didLike = false
-            posts[index].likes -= 1
-        }
+        currentPost = posts[index]
+        
+//        do {
+//            try await postService.likePost(post)
+//        } catch {
+//            print("DEBUG: Failed to like post with error \(error.localizedDescription)")
+//            posts[index].didLike = false
+//            posts[index].likes -= 1
+//        }
     }
     
     func unlike(_ post: Post) async {
@@ -59,13 +66,15 @@ extension FeedViewModel {
         posts[index].didLike = false
         posts[index].likes -= 1
         
-        do {
-            try await postService.unlikePost(post)
-        } catch {
-            print("DEBUG: Failed to unlike post with error \(error.localizedDescription)")
-            posts[index].didLike = true
-            posts[index].likes += 1
-        }
+        currentPost = posts[index]
+        
+//        do {
+//            try await postService.unlikePost(post)
+//        } catch {
+//            print("DEBUG: Failed to unlike post with error \(error.localizedDescription)")
+//            posts[index].didLike = true
+//            posts[index].likes += 1
+//        }
     }
     
     func checkIfUserLikedPosts() async {
@@ -75,7 +84,13 @@ extension FeedViewModel {
         for i in 0 ..< copy.count {
             do {
                 let post = copy[i]
-                copy[i].didLike = try await self.postService.checkIfUserLikedPost(post)
+                let didLike = try await self.postService.checkIfUserLikedPost(post)
+                
+                if didLike {
+                    currentPost?.didLike = didLike
+                    copy[i].didLike = didLike
+                }
+                
             } catch {
                 print("DEBUG: Failed to check if user liked post")
             }

@@ -513,8 +513,8 @@
 			isa = PBXGroup;
 			children = (
 				2B1E9D642AD479EB00902AE1 /* CommentCell.swift */,
-				2B1E9D5C2AD4798000902AE1 /* CommentsView.swift */,
 				2B1E9D6A2AD47C6700902AE1 /* CommentInputView.swift */,
+				2B1E9D5C2AD4798000902AE1 /* CommentsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

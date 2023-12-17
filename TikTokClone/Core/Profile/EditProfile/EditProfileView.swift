@@ -84,11 +84,11 @@ struct EditProfileView: View {
                     
                     NavigationLink(value: EditProfileOptions.bio) {
                         HStack {
-                            Text("Bio")
+//                            Text("Bio")
                             
                             Spacer()
                             
-                            Text(user.bio ?? "Add a bio")
+//                            Text(user.bio ?? "Add a bio")
                         }
                     }
                     

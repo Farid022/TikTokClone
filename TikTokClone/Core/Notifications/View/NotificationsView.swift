@@ -21,14 +21,14 @@ struct NotificationsView: View {
                 }
 
             }
-            .navigationTitle("Notifications")
+            .navigationTitle("Updates")
             .navigationBarTitleDisplayMode(.inline)
             .refreshable { await viewModel.fetchNotifications() }
             .overlay {
                 if viewModel.isLoading {
                     ProgressView()
                 } else if viewModel.showEmptyView {
-                    ContentUnavailableView("No notifications to show", systemImage: "bubble.middle.bottom")
+                    ContentUnavailableView("No updates to show", systemImage: "bubble.middle.bottom")
                         .foregroundStyle(.gray)
                 }
             }

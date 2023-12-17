@@ -12,6 +12,8 @@ import Firebase
 class AuthService {
     @Published var userSession: FirebaseAuth.User?
     
+    static let shared = AuthService()
+
     func updateUserSession() {
         self.userSession = Auth.auth().currentUser
     }
@@ -43,6 +45,23 @@ class AuthService {
     
     func sendResetPasswordLink(toEmail email: String) async throws {
         try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+    
+    func deleteAccount() {
+        let user = Auth.auth().currentUser
+        
+        user?.delete { error in
+            if let error = error {
+                print("Error is \(error)")
+            } else {
+                do {
+                    try Auth.auth().signOut()
+                    self.userSession = nil
+                }
+                catch {
+                }
+            }
+        }
     }
     
     func signout() {

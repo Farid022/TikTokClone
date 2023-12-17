@@ -1,10 +1,3 @@
-//
-//  CurrentUserProfileView.swift
-//  TikTokClone
-//
-//  Created by Stephan Dowless on 10/9/23.
-//
-
 import SwiftUI
 
 struct CurrentUserProfileView: View {
@@ -29,13 +22,15 @@ struct CurrentUserProfileView: View {
                     ProfileHeaderView(viewModel: profileViewModel)
                         .padding(.top)
                     
-                    PostGridView(viewModel: profileViewModel)
+                    // Pass true to isCurrentUser since it's the current user's profile
+                    PostGridView(viewModel: profileViewModel, isCurrentUser: true)
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Sign Out") {
-                        authService.signout()
+                    NavigationLink(destination: SettingsView(authService: authService)) {
+                        Image(systemName: "ellipsis.circle")
+                            .imageScale(.large)
                     }
                     .font(.subheadline)
                     .fontWeight(.semibold)
@@ -43,13 +38,18 @@ struct CurrentUserProfileView: View {
             }
             .task { await profileViewModel.fetchUserPosts() }
             .task { await profileViewModel.fetchUserStats() }
-            .navigationTitle("Profile")
+            .navigationTitle(user.username) // Set the navigationTitle to user.username
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
-#Preview {
-    CurrentUserProfileView(authService: AuthService(),
-                           user: DeveloperPreview.user)
+// Preview provider
+#if DEBUG
+struct CurrentUserProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        CurrentUserProfileView(authService: AuthService(),
+                               user: DeveloperPreview.user)
+    }
 }
+#endif

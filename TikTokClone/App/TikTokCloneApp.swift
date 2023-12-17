@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import AppTrackingTransparency
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,

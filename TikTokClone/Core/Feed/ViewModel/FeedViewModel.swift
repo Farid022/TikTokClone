@@ -37,6 +37,8 @@ class FeedViewModel: ObservableObject {
             isLoading = false
             showEmptyView = posts.isEmpty
             await checkIfUserLikedPosts()
+            
+            
         } catch {
             isLoading = false
             print("DEBUG: Failed to fetch posts \(error.localizedDescription)")

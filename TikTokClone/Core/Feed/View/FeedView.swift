@@ -1,10 +1,15 @@
 import SwiftUI
+import _PhotosUI_SwiftUI
 import AVKit
 import AppTrackingTransparency
 
 struct FeedView: View {
     @Binding var player: AVPlayer
     @StateObject var viewModel: FeedViewModel
+    @StateObject var post_vm = UploadPostViewModel(service: UploadPostService())
+    
+    //@State var posts: [Post] = []
+    
     @State private var scrollPosition: String?
     
     init(player: Binding<AVPlayer>, posts: [Post] = []) {
@@ -28,7 +33,7 @@ struct FeedView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .topLeading) {
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
                         ForEach($viewModel.posts) { post in
                             FeedCell(post: post, player: player, viewModel: viewModel)
@@ -43,7 +48,6 @@ struct FeedView: View {
                     UIScrollView.appearance().showsVerticalScrollIndicator = false
                     UIScrollView.appearance().showsHorizontalScrollIndicator = false
                 }
-                
                 Button {
                     Task { await viewModel.refreshFeed() }
                 } label: {
@@ -85,12 +89,14 @@ struct FeedView: View {
             })
             .toolbar(tabState, for: .tabBar)
             .overlay(alignment: .topTrailing) {
-                Image(systemName: "video.badge.plus")
-                    .foregroundColor(.white)
-                    .font(Font.system(size:23,weight: .bold))
-                    .padding(.trailing)
-            } 
-            
+                PhotosPicker(selection: $post_vm.selectedItem,
+                             matching: .any(of: [.videos, .not(.images)])) {
+                    Image(systemName: "video.badge.plus")
+                        .foregroundColor(.white)
+                        .font(Font.system(size:23,weight: .bold))
+                        .padding(.trailing)
+                }
+            }
         }
     }
     
@@ -201,3 +207,24 @@ struct FeedView: View {
         }
     }
 }
+
+
+/*
+ .onReceive(viewModel.$posts) { posts in
+     self.posts = posts.enumerated().map { (i, post) in
+         let player = AVPlayer(url: URL(string: post.videoUrl)!)
+         return Post(
+             id: post.id,
+             videoUrl: post.videoUrl,
+             ownerUid: post.ownerUid,
+             caption: post.ownerUid,
+             likes: post.likes,
+             commentCount: post.commentCount,
+             saveCount: post.saveCount,
+             shareCount: post.shareCount,
+             views: post.views,
+             thumbnailUrl: post.thumbnailUrl,
+             timestamp: post.timestamp)
+     }
+ }
+ */

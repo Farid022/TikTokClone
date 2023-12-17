@@ -16,6 +16,7 @@ class UploadPostViewModel: ObservableObject {
     @Published var mediaPreview: Movie?
     @Published var caption = ""
     @Published var selectedMediaForUpload: Movie?
+    
     @Published var selectedItem: PhotosPickerItem? {
         didSet { Task { await loadVideo(fromItem: selectedItem) } }
     }

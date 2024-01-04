@@ -83,10 +83,10 @@ struct FeedView: View {
             .navigationDestination(for: User.self, destination: { user in
                 ProfileView(user: user)
             })
-            .onChange(of: scrollPosition, { oldValue, newValue in
+            .onChange(of: scrollPosition) { oldValue, newValue in
                 playVideoOnChangeOfScrollPosition(postId: newValue)
                 //handleTabState(newValue)
-            })
+            }
             .toolbar(tabState, for: .tabBar)
             .overlay(alignment: .topTrailing) {
                 PhotosPicker(selection: $post_vm.selectedItem,
@@ -148,6 +148,17 @@ struct FeedView: View {
         let playerItem = AVPlayerItem(url: videoURL)
         player.replaceCurrentItem(with: playerItem)
     }
+    
+//    private func playVideoOnChangeOfScrollPosition(postId: String?) {
+//        guard let postId = postId else {
+//            return
+//        }
+//
+//        if let post = viewModel.posts.first(where: { $0.id == postId }),
+//           let videoURL = URL(string: post.videoUrl) {
+//            player.replaceCurrentItem(with: AVPlayerItem(url: videoURL))
+//        }
+//    }
     
     
     //MARK: Updated - Farid Khan work
